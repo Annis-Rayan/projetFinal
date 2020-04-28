@@ -30,7 +30,7 @@ public class Localisation {
 	@Column(name = "Localite", length = 100)
 	private String Localite;
 	
-	@OneToMany(mappedBy = "id.observation")
+	@OneToMany(mappedBy = "observation" )
 	private Set<Observation> lobserv;
 	
 	public Localisation() {
