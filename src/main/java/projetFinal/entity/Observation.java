@@ -1,6 +1,9 @@
 package projetFinal.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -11,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,7 +35,7 @@ public class Observation {
 	@Temporal(TemporalType.DATE)
 	private Date dateObservation;
 	@Column(name="nombre",nullable=false)
-	private short nombre;
+	private Integer nombre;
 	@Column(name="description",nullable=false)
 	private String description;
 	@OneToOne()
@@ -43,6 +47,9 @@ public class Observation {
 	@OneToOne()
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
+	@OneToMany(mappedBy="observation")
+	private Set<SignalementObservation> signalementObservation=new HashSet<>();
+	
 	
 	
 	// constructeur
@@ -106,12 +113,12 @@ public class Observation {
 	}
 
 
-	public short getNombre() {
+	public Integer getNombre() {
 		return nombre;
 	}
 
 
-	public void setNombre(short nombre) {
+	public void setNombre(Integer nombre) {
 		this.nombre = nombre;
 	}
 
