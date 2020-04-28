@@ -25,12 +25,12 @@ import javax.persistence.TemporalType;
 public class Observation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqObservation")
-	@Column(name="idObservation")
+	@Column(name="id_observation")
 	private Integer id;
-	@Column(name="dateObservation")
+	@Column(name="date_observation",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dateObservation;
-	@Column(name="nombre")
+	@Column(name="nombre",nullable=false)
 	private short nombre;
 	@Column(name="description",nullable=false)
 	private String description;
