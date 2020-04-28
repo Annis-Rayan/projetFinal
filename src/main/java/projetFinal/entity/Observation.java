@@ -44,9 +44,47 @@ public class Observation {
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
 	
+	
+	// constructeur
+	
 	public Observation() {
 	}
 
+	
+	// methodes
+	
+	
+	public Localisation getLocalisation() {
+		return localisation;
+	}
+
+
+	public void setLocalisation(Localisation localisation) {
+		this.localisation = localisation;
+	}
+
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+
+	public Animal getAnimal() {
+		return animal;
+	}
+
+
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+
+
+	
 
 	public Integer getId() {
 		return id;
