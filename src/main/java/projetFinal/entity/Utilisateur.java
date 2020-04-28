@@ -1,15 +1,15 @@
 package projetFinal.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -46,9 +46,8 @@ public class Utilisateur {
 	private TypeUtilisateur type;
 	
 	
-	@OneToOne
-	@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "utilisateur_observation_fk"))
-	private Observation observation;
+	@OneToMany(mappedBy = "id.utilisateur")
+	private List<Observation> observations;
 	
 
 
@@ -145,15 +144,29 @@ public class Utilisateur {
 
 
 
-	public Observation getObservation() {
-		return observation;
+	public String getPseudo() {
+		return pseudo;
 	}
 
 
 
 
-	public void setObservation(Observation observation) {
-		this.observation = observation;
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
+
+
+
+	public List<Observation> getObservations() {
+		return observations;
+	}
+
+
+
+
+	public void setObservations(List<Observation> observations) {
+		this.observations = observations;
 	}
 
 
