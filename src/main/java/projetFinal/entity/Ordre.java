@@ -1,5 +1,7 @@
 package projetFinal.entity;
 
+
+
 public enum Ordre {
 	
 	Mammifere("Mammifere"), Insecte("Insecte"), Oiseaux("Oiseaux"), Amphibiens("Amphibiens"); 

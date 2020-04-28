@@ -1,18 +1,40 @@
 package projetFinal.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="animal")
+@SequenceGenerator(name="seqAnimal",sequenceName = "seq_ani",initialValue=100,allocationSize=1)
 public class Animal {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqAnimal")
+	@Column(name="id_animal", nullable = false)
 	private Integer id;
+	@Column(name="nom_courant", nullable = false,length = 150)
 	private String nomCourant;
+	@Column(name="nom_scientifique", length = 150)
 	private String nomScientifique;
-	private String emplacement;
+	@Column(name="emplacement_image")
+	private String emplacementImage;
+	@Column(name="description")
 	private String description;
+	@Column(name="ordre", length=20)
+	@Enumerated(EnumType.STRING)
 	private Ordre ordre;
 	
-	public Animal(String nomCourant, String nomScientifique, String emplacement, String description) {
+	public Animal(String nomCourant, String nomScientifique, String emplacementImage, String description) {
 		this.nomCourant = nomCourant;
 		this.nomScientifique = nomScientifique;
-		this.emplacement = emplacement;
+		this.emplacementImage = emplacementImage;
 		this.description = description;
 	}
 
@@ -42,12 +64,12 @@ public class Animal {
 		this.nomScientifique = nomScientifique;
 	}
 
-	public String getEmplacement() {
-		return emplacement;
+	public String getEmplacementImage() {
+		return emplacementImage;
 	}
 
-	public void setEmplacement(String emplacement) {
-		this.emplacement = emplacement;
+	public void setEmplacementImage(String emplacementImage) {
+		this.emplacementImage = emplacementImage;
 	}
 
 	public String getDescription() {
@@ -80,6 +102,7 @@ public class Animal {
 	public void setOrdre(Ordre ordre) {
 		this.ordre = ordre;
 	}
+
 
 
 	@Override
