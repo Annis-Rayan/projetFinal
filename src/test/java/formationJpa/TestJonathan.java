@@ -25,7 +25,7 @@ public class TestJonathan {
 		
 		obs.setNombre(2);	
 		obs.setDescription("description");
-		obs.setId(1);
+		//obs.setId(1);
 		System.out.println("-----------------------------------");
 
 		daoObservation.insert(obs);

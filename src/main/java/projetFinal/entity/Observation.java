@@ -49,7 +49,7 @@ public class Observation {
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
 	@OneToMany(mappedBy="observation")
-	private Set<SignalementObservation> signalementObservation=new HashSet<>();
+	private Set<SignalementObservation> signalementObservation = new HashSet<>();
 	
 	
 	

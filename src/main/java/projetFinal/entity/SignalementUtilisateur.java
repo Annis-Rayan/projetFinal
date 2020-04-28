@@ -12,7 +12,7 @@ public class SignalementUtilisateur extends Signalement {
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "utilisateur", foreignKey = @ForeignKey(name = "utilisateur_fk"))
+	@JoinColumn(name = "cible", foreignKey = @ForeignKey(name = "cible_fk"))
 	private Utilisateur cible;
 
 	public Utilisateur getCible() {

@@ -1,6 +1,7 @@
 package projetFinal.entity;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import javassist.expr.NewArray;
 
 @Entity
 @Table(name="animal")
@@ -35,7 +38,7 @@ public class Animal {
 	@Enumerated(EnumType.STRING)
 	private Ordre ordre;
 	@OneToMany (mappedBy = "animal")
-	private List<Observation> observations;
+	private List<Observation> observations=new ArrayList<Observation>();
 	
 	public Animal(String nomCourant, String nomScientifique, String emplacementImage, String description) {
 		this.nomCourant = nomCourant;

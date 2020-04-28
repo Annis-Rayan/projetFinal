@@ -1,5 +1,6 @@
 package projetFinal.entity;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -49,16 +50,16 @@ public class Utilisateur {
 	private TypeUtilisateur type;
 	
 	
-	@OneToMany(mappedBy = "id.utilisateur")
-	@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "observation_fk"))
-	private List<Observation> observations;
+	@OneToMany(mappedBy = "utilisateur")
+	//@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "observation_fk"))
+	private Set<Observation> observations = new HashSet<>();
 	
 	
-	@OneToMany(mappedBy = "id.utilisateur")
-	private Set<Signalement> signalement;
+	@OneToMany(mappedBy = "auteur")
+	private Set<Signalement> signalement = new HashSet<>();
 	
-	@OneToMany(mappedBy = "id.utilisateur")
-	private Set<SignalementUtilisateur> signalementUtilisateur;
+	@OneToMany(mappedBy = "cible")
+	private Set<SignalementUtilisateur> signalementUtilisateur = new HashSet<>();
 
 
 	@Version
@@ -168,14 +169,14 @@ public class Utilisateur {
 
 
 
-	public List<Observation> getObservations() {
+	public Set<Observation> getObservations() {
 		return observations;
 	}
 
 
 
 
-	public void setObservations(List<Observation> observations) {
+	public void setObservations(Set<Observation> observations) {
 		this.observations = observations;
 	}
 

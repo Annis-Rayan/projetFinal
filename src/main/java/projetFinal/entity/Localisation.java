@@ -1,5 +1,6 @@
 package projetFinal.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -30,8 +31,8 @@ public class Localisation {
 	@Column(name = "Localite", length = 100)
 	private String Localite;
 	
-	@OneToMany(mappedBy = "observation" )
-	private Set<Observation> lobserv;
+	@OneToMany(mappedBy = "localisation" )
+	private Set<Observation> lobserv=new HashSet<>();
 	
 	public Localisation() {
 		super();
