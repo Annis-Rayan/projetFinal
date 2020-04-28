@@ -104,14 +104,14 @@ public class DaoLocalisationJpaImpl implements DaoLocalisation{
 
 	@Override
 	public List<Localisation> findAll() {
-		List<Localisation> salles = null;
+		List<Localisation> localisation = null;
 		EntityManager em = Context.getEntityManagerFactory().createEntityManager();
-		Query query = em.createQuery("from Salle s");
-		salles = query.getResultList();
+		Query query = em.createQuery("from localisation l");
+		localisation = query.getResultList();
 		if (em != null && em.isOpen()) {
 			em.close();
 		}
-		return salles;
+		return localisation;
 	}
 
 }
