@@ -25,12 +25,12 @@ import javax.persistence.TemporalType;
 public class Observation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqObservation")
-	@Column(name="idObservation")
+	@Column(name="id_observation")
 	private Integer id;
-	@Column(name="dateObservation")
+	@Column(name="date_observation",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dateObservation;
-	@Column(name="nombre")
+	@Column(name="nombre",nullable=false)
 	private short nombre;
 	@Column(name="description",nullable=false)
 	private String description;
@@ -44,9 +44,47 @@ public class Observation {
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
 	
+	
+	// constructeur
+	
 	public Observation() {
 	}
 
+	
+	// methodes
+	
+	
+	public Localisation getLocalisation() {
+		return localisation;
+	}
+
+
+	public void setLocalisation(Localisation localisation) {
+		this.localisation = localisation;
+	}
+
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+
+	public Animal getAnimal() {
+		return animal;
+	}
+
+
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+
+
+	
 
 	public Integer getId() {
 		return id;

@@ -4,12 +4,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+
 
 @Entity
 @Table(name = "utilisateur")
@@ -24,11 +29,14 @@ public class Utilisateur {
 	@Column(name = "id_utilisateur")
 	private Integer id;
 	
-	@Column(name = "prenom", length = 50, nullable = false)
+	@Column(name = "prenom", length = 50)
 	private String prenom;
 	
-	@Column(name = "nom", length = 50, nullable = false)
+	@Column(name = "nom", length = 50)
 	private String nom;
+	
+	@Column(name = "pseudo", length = 50, nullable = false)
+	private String pseudo;
 	
 	@Column(name = "photo_profil", length = 50, nullable = false)
 	private String imageProfil;
@@ -38,6 +46,12 @@ public class Utilisateur {
 	private TypeUtilisateur type;
 	
 	
+	@OneToOne
+	@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "utilisateur_observation_fk"))
+	private Observation observation;
+	
+
+
 	@Version
 	private int version;
 
@@ -126,6 +140,24 @@ public class Utilisateur {
 
 		
 	//hashCode et equals
+
+
+
+
+
+	public Observation getObservation() {
+		return observation;
+	}
+
+
+
+
+	public void setObservation(Observation observation) {
+		this.observation = observation;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {
