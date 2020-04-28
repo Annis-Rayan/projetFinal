@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -38,13 +39,13 @@ public class Observation {
 	private Integer nombre;
 	@Column(name="description",nullable=false)
 	private String description;
-	@OneToOne()
+	@ManyToOne
 	@JoinColumn(name = "localisation", foreignKey = @ForeignKey(name = "localisation_fk"))
 	private Localisation localisation;
-	@OneToOne()
+	@ManyToOne
 	@JoinColumn(name = "utilisateur", foreignKey = @ForeignKey(name = "utilisateur_fk"))
 	private Utilisateur utilisateur;
-	@OneToOne()
+	@ManyToOne
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
 	@OneToMany(mappedBy="observation")
