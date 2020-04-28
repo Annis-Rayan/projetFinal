@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,6 +31,8 @@ public class Animal {
 	@Column(name="ordre", length=20)
 	@Enumerated(EnumType.STRING)
 	private Ordre ordre;
+	@ManyToOne
+	private Observation observation;
 	
 	public Animal(String nomCourant, String nomScientifique, String emplacementImage, String description) {
 		this.nomCourant = nomCourant;
@@ -103,6 +106,16 @@ public class Animal {
 		this.ordre = ordre;
 	}
 
+
+
+	public Observation getObservation() {
+		return observation;
+	}
+
+
+	public void setObservation(Observation observation) {
+		this.observation = observation;
+	}
 
 
 	@Override
