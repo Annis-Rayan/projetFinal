@@ -15,7 +15,7 @@ public class TestAnnis {
 		
 		System.out.println("_______________");
 		
-		u1.setId(1);
+		
 		u1.setPseudo("Annis");
 		
 		System.out.println("_______________");
