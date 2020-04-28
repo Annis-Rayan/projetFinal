@@ -1,14 +1,17 @@
 package projetFinal.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -47,8 +50,15 @@ public class Utilisateur {
 	
 	
 	@OneToMany(mappedBy = "id.utilisateur")
+	@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "observation_fk"))
 	private List<Observation> observations;
 	
+	
+	@OneToMany(mappedBy = "id.utilisateur")
+	private Set<Signalement> signalement;
+	
+	@OneToMany(mappedBy = "id.utilisateur")
+	private Set<SignalementUtilisateur> signalementUtilisateur;
 
 
 	@Version
