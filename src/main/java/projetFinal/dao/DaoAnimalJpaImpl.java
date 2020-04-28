@@ -15,7 +15,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public void insert(Animal obj) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx=em.getTransaction();
 		try {
 			tx.begin();
@@ -33,7 +33,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public Animal update(Animal obj) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx=em.getTransaction();
 		try {
 			tx.begin();
@@ -53,7 +53,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public void delete(Animal obj) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx=em.getTransaction();
 		try {
 			tx.begin();
@@ -74,7 +74,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public void deleteByKey(Integer key) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx=em.getTransaction();
 		try {
 			tx.begin();
@@ -94,7 +94,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public Optional<Animal> findByKey(Integer key) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		Optional<Animal> optional=Optional.ofNullable(em.find(Animal.class, key));
 		if(em!=null && em.isOpen()) {
 			em.close();
@@ -105,7 +105,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 	@Override
 	public List<Animal> findAll() {
 		List<Animal> formations =null;
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		Query query=em.createQuery("from Animal a");
 		formations=query.getResultList();
 		
@@ -121,7 +121,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public Optional<Animal> findByNomScientifique(String nomScientifique) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		Optional<Animal> optional=Optional.ofNullable(em.find(Animal.class, nomScientifique));
 		if(em!=null && em.isOpen()) {
 			em.close();
@@ -131,7 +131,7 @@ public class DaoAnimalJpaImpl implements DaoAnimal{
 
 	@Override
 	public Optional<Animal> findByNomCourant(String nomCourant) {
-		EntityManager em=Context.getEntityMangerFactory().createEntityManager();
+		EntityManager em=Context.getEntityManagerFactory().createEntityManager();
 		Optional<Animal> optional=Optional.ofNullable(em.find(Animal.class, nomCourant));
 		if(em!=null && em.isOpen()) {
 			em.close();
