@@ -42,7 +42,7 @@ public class Utilisateur {
 	@Column(name = "pseudo", length = 50, nullable = false)
 	private String pseudo;
 	
-	@Column(name = "photo_profil", length = 50, nullable = false)
+	@Column(name = "photo_profil", length = 50)
 	private String imageProfil;
 	
 	@Column(name = "type", length = 5)
