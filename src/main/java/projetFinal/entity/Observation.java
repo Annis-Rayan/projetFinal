@@ -6,14 +6,17 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 
 @Entity
@@ -31,7 +34,15 @@ public class Observation {
 	private short nombre;
 	@Column(name="description",nullable=false)
 	private String description;
-	
+	@OneToOne()
+	@JoinColumn(name = "localisation", foreignKey = @ForeignKey(name = "localisation_fk"))
+	private Localisation localisation;
+	@OneToOne()
+	@JoinColumn(name = "utilisateur", foreignKey = @ForeignKey(name = "utilisateur_fk"))
+	private Utilisateur utilisateur;
+	@OneToOne()
+	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
+	private Animal animal;
 	
 	public Observation() {
 	}
