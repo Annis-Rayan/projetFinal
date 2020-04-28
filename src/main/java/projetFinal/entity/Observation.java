@@ -35,7 +35,7 @@ public class Observation {
 	@Temporal(TemporalType.DATE)
 	private Date dateObservation;
 	@Column(name="nombre",nullable=false)
-	private short nombre;
+	private Integer nombre;
 	@Column(name="description",nullable=false)
 	private String description;
 	@OneToOne()
@@ -48,7 +48,7 @@ public class Observation {
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
 	@OneToMany(mappedBy="observation")
-	private Set<SignalementUtilisateur> signalementUtilisateur=new HashSet<>();
+	private Set<SignalementObservation> signalementObservation=new HashSet<>();
 	
 	
 	
@@ -113,12 +113,12 @@ public class Observation {
 	}
 
 
-	public short getNombre() {
+	public Integer getNombre() {
 		return nombre;
 	}
 
 
-	public void setNombre(short nombre) {
+	public void setNombre(Integer nombre) {
 		this.nombre = nombre;
 	}
 
