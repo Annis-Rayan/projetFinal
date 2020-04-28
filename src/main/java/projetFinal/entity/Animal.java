@@ -7,6 +7,7 @@ public class Animal {
 	private String nomScientifique;
 	private String emplacement;
 	private String description;
+	private Ordre ordre;
 	
 	public Animal(String nomCourant, String nomScientifique, String emplacement, String description) {
 		this.nomCourant = nomCourant;
@@ -69,6 +70,16 @@ public class Animal {
 		this.id = id;
 	}
 
+
+
+	public Ordre getOrdre() {
+		return ordre;
+	}
+
+
+	public void setOrdre(Ordre ordre) {
+		this.ordre = ordre;
+	}
 
 
 	@Override
