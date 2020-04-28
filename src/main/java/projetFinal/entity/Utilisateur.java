@@ -4,12 +4,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+
 
 @Entity
 @Table(name = "utilisateur")
@@ -38,6 +43,12 @@ public class Utilisateur {
 	private TypeUtilisateur type;
 	
 	
+	@OneToOne
+	@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "utilisateur_observation_fk"))
+	private Observation observation;
+	
+
+
 	@Version
 	private int version;
 
@@ -126,6 +137,24 @@ public class Utilisateur {
 
 		
 	//hashCode et equals
+
+
+
+
+
+	public Observation getObservation() {
+		return observation;
+	}
+
+
+
+
+	public void setObservation(Observation observation) {
+		this.observation = observation;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {
