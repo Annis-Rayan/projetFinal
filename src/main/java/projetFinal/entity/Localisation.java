@@ -1,10 +1,13 @@
 package projetFinal.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,10 +30,12 @@ public class Localisation {
 	@Column(name = "Localite", length = 100)
 	private String Localite;
 	
+	@OneToMany(mappedBy = "id.observation")
+	private Set<Observation> lobserv;
 	
 	public Localisation() {
 		super();
-	}
+	} 
 
 
 	public String getPays() {
@@ -70,6 +75,15 @@ public class Localisation {
 
 	public void setID(Integer iD) {
 		ID = iD;
+	}
+
+	public Set<Observation> getLobserv() {
+		return lobserv;
+	}
+
+
+	public void setLobserv(Set<Observation> lobserv) {
+		this.lobserv = lobserv;
 	}
 
 
