@@ -1,5 +1,8 @@
 package projetFinal.entity;
 
+
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,7 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,8 +34,8 @@ public class Animal {
 	@Column(name="ordre", length=20)
 	@Enumerated(EnumType.STRING)
 	private Ordre ordre;
-	@ManyToOne
-	private Observation observation;
+	@OneToMany (mappedBy = "animal")
+	private List<Observation> observations;
 	
 	public Animal(String nomCourant, String nomScientifique, String emplacementImage, String description) {
 		this.nomCourant = nomCourant;
@@ -108,13 +111,15 @@ public class Animal {
 
 
 
-	public Observation getObservation() {
-		return observation;
+
+
+	public List<Observation> getObservations() {
+		return observations;
 	}
 
 
-	public void setObservation(Observation observation) {
-		this.observation = observation;
+	public void setObservations(List<Observation> observations) {
+		this.observations = observations;
 	}
 
 
