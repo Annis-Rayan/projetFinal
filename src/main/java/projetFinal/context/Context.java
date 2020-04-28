@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 public class Context {
 	private static EntityManagerFactory emf = null;
 	
-	public static EntityManagerFactory getEntityMangerFactory() {
+	public static EntityManagerFactory getEntityManagerFactory() {
 		if(emf==null) {
 			emf = Persistence.createEntityManagerFactory("projetfinal");
 		}
