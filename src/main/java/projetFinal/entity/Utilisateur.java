@@ -29,11 +29,14 @@ public class Utilisateur {
 	@Column(name = "id_utilisateur")
 	private Integer id;
 	
-	@Column(name = "prenom", length = 50, nullable = false)
+	@Column(name = "prenom", length = 50)
 	private String prenom;
 	
-	@Column(name = "nom", length = 50, nullable = false)
+	@Column(name = "nom", length = 50)
 	private String nom;
+	
+	@Column(name = "pseudo", length = 50, nullable = false)
+	private String pseudo;
 	
 	@Column(name = "photo_profil", length = 50, nullable = false)
 	private String imageProfil;
