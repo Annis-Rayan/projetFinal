@@ -1,10 +1,30 @@
 package projetFinal.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "localisation")
+@SequenceGenerator(name = "seqlocalisation", sequenceName = "seq_localisation", initialValue = 100, allocationSize = 1)
 public class Localisation {
 	
-	private int ID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqlocalisation")
+	@Column(name = "id_localisation")
+	private Integer ID;
+	
+	@Column(name = "Pays", length = 50, nullable = false)
 	private String Pays;
+	
+	@Column(name = "Region", length = 100, nullable = false)
 	private String Region;
+	
+	@Column(name = "Localite", length = 100)
 	private String Localite;
 	
 	
@@ -43,12 +63,12 @@ public class Localisation {
 	}
 
 
-	public int getID() {
+	public Integer getID() {
 		return ID;
 	}
 
 
-	public void setID(int iD) {
+	public void setID(Integer iD) {
 		ID = iD;
 	}
 
