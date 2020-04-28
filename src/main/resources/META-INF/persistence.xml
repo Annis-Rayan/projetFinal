@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="projetsopra" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="projetfinal" transaction-type="RESOURCE_LOCAL">
 		<!-- provider =>implementation de jpa -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- proprietes pour l'unité de persistance -->
@@ -11,7 +11,7 @@
 			<!-- driver jdbc -->
 			<property name="hibernate.connection.driver" value="org.postgresql.driver"/>
 			<!-- url -->
-			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/projetsopra"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/projetfinal"/>
 			<!-- login -->
 			<property name="hibernate.connection.user" value="postgres"/>
 			<!-- password -->
