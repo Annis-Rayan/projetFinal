@@ -1,11 +1,8 @@
 package projetFinal.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,16 +11,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import net.bytebuddy.asm.Advice.Local;
 import projetFinal.config.AppConfig;
 import projetFinal.entity.Animal;
 import projetFinal.entity.InitBdd;
-import projetFinal.entity.Localisation;
-import projetFinal.entity.Observation;
-import projetFinal.entity.Utilisateur;
 import projetFinal.exception.NoObservationFoundException;
-import projetFinal.repository.LocalisationRepository;
-import projetFinal.repository.ObservationRepository;
 import projetFinal.service.AnimalService;
 import projetFinal.service.LocalisationService;
 import projetFinal.service.ObservationService;
@@ -44,7 +35,6 @@ public class TestObservation {
 		InitBdd i=new InitBdd();
 		i.plop(ctx);
 		
-		//ObservationService.ctx=ctx;
 	}
 	
 	@AfterClass
