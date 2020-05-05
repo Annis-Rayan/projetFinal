@@ -1,8 +1,10 @@
 package projetFinal.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import projetFinal.entity.Localisation;
@@ -61,5 +63,15 @@ public class LocalisationService {
 		
 		return false;
 	}
+		
+	public List<Localisation> find(String region,String localite) {
+		
+		Localisation loc=new Localisation();
+		loc.setLocalite(localite);
+		loc.setRegion(region);
+		
+		return locrep.findAll(Example.of(loc));
+	}
+	
 	
 }

@@ -81,7 +81,7 @@ public class ObservationService {
 		return false;
 	}
 	
-	public boolean suppressionAnimal(Animal remplacement, Animal doublon) throws NoObservationFoundException {
+	public void suppressionAnimal(Animal remplacement, Animal doublon) throws NoObservationFoundException {
 		
 		//recupere tout les doublons
 		Observation obs=new Observation();
@@ -99,9 +99,31 @@ public class ObservationService {
 		//supprime l'animal en doublon
 		AnimalService as= new AnimalService();
 		as.suppression(doublon.getId());
+	}
+	
+public void suppressionLocalisationParRegion(String remplacement, String doublon) {
+		
+		//recupere tout les doublons
+		Observation obs=new Observation();
+		obs.setLocalisation(new Localisation(doublon,null));
+		Example<Observation> example= Example.of(obs);
+	    List<Observation> listeObservation = observationRepository.findAll(example);
+		
+		
+	    //update les doublons avec le nom
 	    
+	    	//si present dans la base :suppression
+	    
+	    
+	    
+	    	//si non present dans la base :maj
+	   // for (Observation observation : listeObservation) {
+		//	observation.setAnimal(remplacement);
+		//	miseAjour(observation);
+		//}
 		
-		
-		return true;
+		//supprime l'animal en doublon
+		//AnimalService as= new AnimalService();
+		//as.suppression(doublon.getId());
 	}
 }

@@ -110,6 +110,13 @@ public class Localisation {
 			return false;
 		return true;
 	}
+
+
+	public Localisation(String region, String localite) {
+		super();
+		Region = region;
+		Localite = localite;
+	}
 	
 	
 	
