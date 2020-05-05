@@ -5,8 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import projetFinal.entity.Localisation;
 import projetFinal.entity.Observation;
+import projetFinal.exception.NoObservationFoundException;
+import projetFinal.exception.NolocalisationFoundException;
 import projetFinal.repository.ObservationRepositery;
 
 
@@ -32,7 +34,7 @@ public class ObservationService {
 		return true;
 	}
 
-	public Observation miseAjour(Observation observation) {
+	public Observation miseAjour(Observation observation) throws NoObservationFoundException {
 		Optional<Observation> opt = observationRepository.findById(observation.getId());
 		if (opt.isPresent()) {
 			Observation observationEnBase = opt.get();
@@ -57,10 +59,9 @@ public class ObservationService {
 
 			return observationEnBase;
 		} else {
-			// salleRepository.save(salle);// on insert
-			return null;
+			throw new NoObservationFoundException();
 		}
-		// throw new NoSalleFoundException();
+		
 
 	}
 
@@ -70,6 +71,16 @@ public class ObservationService {
 			return opt.get();
 		}
 		throw new IllegalArgumentException();
+	}
+	
+	public boolean suppression(Integer id){
+		Optional<Observation> opt = observationRepository.findById(id);
+		if (opt.isPresent()) {
+			observationRepository.deleteById(id);
+			return true;
+		}
+		
+		return false;
 	}
 
 }
