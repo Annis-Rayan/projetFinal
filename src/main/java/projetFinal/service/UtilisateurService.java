@@ -31,6 +31,7 @@ public class UtilisateurService {
 
 			utilisateurEnBase.setNom(utilisateur.getNom());
 			utilisateurEnBase.setPrenom(utilisateur.getPrenom());
+			utilisateurEnBase.setImageProfil(utilisateur.getImageProfil());
 			utilisateurRepository.save(utilisateur);
 			return utilisateurEnBase;
 		}else {
