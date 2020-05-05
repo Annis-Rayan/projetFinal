@@ -52,6 +52,15 @@ public class Animal {
 	}
 
 
+	public Animal(String nomScientifique, String emplacementImage, String description, Ordre ordre) {
+		super();
+		this.nomScientifique = nomScientifique;
+		this.emplacementImage = emplacementImage;
+		this.description = description;
+		this.ordre = ordre;
+	}
+
+
 	public Animal(String nomCourant, String description) {
 		this.nomCourant = nomCourant;
 		this.description = description;
