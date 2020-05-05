@@ -52,7 +52,7 @@ public class LocalisationService {
 		throw new IllegalArgumentException();
 	}
 	
-	public boolean suppretion(Integer id){
+	public boolean suppression(Integer id){
 		Optional<Localisation> opt = locrep.findById(id);
 		if (opt.isPresent()) {
 			locrep.deleteById(id);
