@@ -32,7 +32,7 @@ public class AnimalService {
 		animalRepository.save(animal);
 	}
 
-	public Animal miseAjour(Animal animal) {
+	public Animal miseAjour(Animal animal) throws NoAnimalFoundException {
 		Optional<Animal> opt = animalRepository.findById(animal.getId());
 		//Optional<Animal> opt2 = animalRepository.findByNomCourant(animal.getNomCourant());
 		if (opt.isPresent()) {
@@ -57,14 +57,16 @@ public class AnimalService {
 			}
 			
 			animalRepository.save(animalEnBase);
+			return animal;
+			
 		} else {
-			return null;
+			throw new NoAnimalFoundException();
 		}
-		return animal;
+		
 		// throw new NoAnimalFoundException()
 	}
 	
-	public Animal recherche (Integer id) throws NoAnimalFoundException {
+	public Animal recherche (Integer id)  {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
@@ -72,7 +74,7 @@ public class AnimalService {
 		
 			} 
 		else {
-			throw new NoAnimalFoundException();
+			throw new IllegalArgumentException();
 		}		
 				
 	} 
