@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projetFinal.entity.Animal;
-import projetFinal.entity.Localisation;
 import projetFinal.exception.NoAnimalFoundException;
 import projetFinal.repository.AnimalRepository;
 
