@@ -100,6 +100,8 @@ public class ObservationService {
 		AnimalService as= new AnimalService();
 		as.suppression(doublon.getId());
 	    
+		
+		
 		return true;
 	}
 }
