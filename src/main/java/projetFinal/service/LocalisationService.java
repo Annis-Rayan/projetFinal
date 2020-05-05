@@ -52,4 +52,14 @@ public class LocalisationService {
 		throw new IllegalArgumentException();
 	}
 	
+	public boolean suppression(Integer id){
+		Optional<Localisation> opt = locrep.findById(id);
+		if (opt.isPresent()) {
+			locrep.deleteById(id);
+			return true;
+		}
+		
+		return false;
+	}
+	
 }
