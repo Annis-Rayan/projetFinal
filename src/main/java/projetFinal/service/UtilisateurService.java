@@ -41,7 +41,7 @@ public class UtilisateurService {
 		
 	}
 	
-	public Utilisateur recherche(Integer id) {
+	public Utilisateur rechercheById(Integer id) {
 		Optional<Utilisateur> opt = utilisateurRepository.findById(id);
 		if(opt.isPresent()) {
 			return opt.get();
@@ -49,7 +49,28 @@ public class UtilisateurService {
 		throw new IllegalArgumentException();
 	}
 	
+	public Utilisateur rechercheByPseudo(String pseudo) {
+		Optional<Utilisateur> opt = utilisateurRepository.findByPseudo(pseudo);
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+		throw new IllegalArgumentException();
+	}
 	
+	public Utilisateur rechercheByPseudoWithObservations(String pseudo) {
+		Optional<Utilisateur> opt = utilisateurRepository.findByPseudoWithObservations(pseudo);
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+		throw new IllegalArgumentException();
+	}
 	
+	public Utilisateur rechercheByIdWithObservations(Integer id) {
+		Optional<Utilisateur> opt = utilisateurRepository.findByIdWithObservations(id);
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+		throw new IllegalArgumentException();
+	}
 	
 }

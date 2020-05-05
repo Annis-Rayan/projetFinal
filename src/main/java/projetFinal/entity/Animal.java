@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import javassist.expr.NewArray;
+
 
 @Entity
 @Table(name="animal")
@@ -26,9 +26,9 @@ public class Animal {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqAnimal")
 	@Column(name="id_animal", nullable = false)
 	private Integer id;
-	@Column(name="nom_courant", nullable = false,length = 150)
+	@Column(name="nom_courant", nullable = false,unique = true, length = 150)
 	private String nomCourant;
-	@Column(name="nom_scientifique", length = 150)
+	@Column(name="nom_scientifique",unique = true, length = 150)
 	private String nomScientifique;
 	@Column(name="emplacement_image")
 	private String emplacementImage;
