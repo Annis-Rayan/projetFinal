@@ -19,13 +19,13 @@ public class AnimalService {
 
 	public void ajout(Animal animal) {
 		
-		if (animal.getNomScientifique().isEmpty()) {
+		if (animal.getNomScientifique()==null || animal.getNomScientifique().isEmpty()) {
 			animal.setNomScientifique("non defini");
 		}
-		if (animal.getDescription().isEmpty()) {
+		if (animal.getDescription()==null || animal.getDescription().isEmpty()) {
 			animal.setDescription("non defini");
 		}
-		if (animal.getEmplacementImage().isEmpty()) {
+		if (animal.getEmplacementImage()==null || animal.getEmplacementImage().isEmpty()) {
 			animal.setEmplacementImage("non defini");
 		}
 		
@@ -80,6 +80,8 @@ public class AnimalService {
 	} 
 	
 	public boolean suppression(Integer id) {
+		
+		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
 			animalRepository.deleteById(id);

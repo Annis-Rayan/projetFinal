@@ -11,7 +11,7 @@ import projetFinal.entity.Animal;
 
 public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 
-	@Query ("select a from Animal a left join fetch a.nomCourant where a.nomCourant=:nomCourant")
-	Optional<Animal> findByNomCourant(@Param("nomCourant")String nomCourant);
+	//@Query ("select a from Animal a left join fetch a.nomCourant where a.nomCourant=:nomCourant")
+	//Optional<Animal> findByNomCourant(@Param("nomCourant")String nomCourant);
 	
 }

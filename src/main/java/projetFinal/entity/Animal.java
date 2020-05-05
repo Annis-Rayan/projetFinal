@@ -28,7 +28,7 @@ public class Animal {
 	private Integer id;
 	@Column(name="nom_courant", nullable = false,unique = true, length = 150)
 	private String nomCourant;
-	@Column(name="nom_scientifique",unique = true, length = 150)
+	@Column(name="nom_scientifique",unique = false, length = 150)
 	private String nomScientifique;
 	@Column(name="emplacement_image")
 	private String emplacementImage;
