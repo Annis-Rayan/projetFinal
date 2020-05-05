@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projetFinal.entity.Signalement;
+import projetFinal.exception.NoSignalementFoundException;
 import projetFinal.repository.SignalementRepository;
 
 @Service
@@ -23,7 +24,7 @@ public abstract class SignalementService {
 		signalementRepository.save(signalement);
 	}
 	
-	public Signalement miseAjour(Signalement signalement) {
+	public Signalement miseAjour(Signalement signalement) throws NoSignalementFoundException {
 		Optional<Signalement> opt = signalementRepository.findById(signalement.getId());
 		if(opt.isPresent()) {
 			Signalement signalementEnBase = opt.get();
@@ -37,7 +38,7 @@ public abstract class SignalementService {
 			return signalementEnBase;
 		}else {
 			
-			return null;
+			throw new NoSignalementFoundException();
 		}
 		
 	}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projetFinal.entity.Utilisateur;
+import projetFinal.exception.NoUtilisateurFoundException;
 import projetFinal.repository.UtilisateurRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class UtilisateurService {
 		utilisateurRepository.save(utilisateur);
 	}
 	
-	public Utilisateur miseAjour(Utilisateur utilisateur) {
+	public Utilisateur miseAjour(Utilisateur utilisateur) throws NoUtilisateurFoundException {
 		Optional<Utilisateur> opt = utilisateurRepository.findById(utilisateur.getId());
 		if(opt.isPresent()) {
 			Utilisateur utilisateurEnBase = opt.get();
@@ -36,7 +37,7 @@ public class UtilisateurService {
 			return utilisateurEnBase;
 		}else {
 			
-			return null;
+			throw new NoUtilisateurFoundException();
 		}
 		
 	}
