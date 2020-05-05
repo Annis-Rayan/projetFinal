@@ -1,7 +1,11 @@
 package formationJpa;
 
+import projetFinal.dao.DaoSignalement;
+import projetFinal.dao.DaoSignalementFactory;
 import projetFinal.dao.DaoUtilisateur;
 import projetFinal.dao.DaoUtilisateurFactory;
+import projetFinal.entity.Signalement;
+import projetFinal.entity.SignalementObservation;
 import projetFinal.entity.Utilisateur;
 
 public class TestAnnis {
@@ -22,6 +26,15 @@ public class TestAnnis {
 		
 		daoUtilisateur.insert(u1);
 		System.out.println("_______________");
+		
+		
+		Signalement s1 = new SignalementObservation();
+		
+		DaoSignalement daoSignalement = DaoSignalementFactory.getInstance();
+		
+		s1.setDescription("observation fausse");
+		
+		daoSignalement.insert(s1);
 
 	}
 
