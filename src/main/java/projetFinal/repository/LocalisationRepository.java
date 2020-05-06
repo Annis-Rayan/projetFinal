@@ -9,5 +9,5 @@ import projetFinal.entity.Localisation;
 
 public interface LocalisationRepository extends JpaRepository<Localisation, Integer> {
 	
-	List<String> findByPays(String pays);
+	
 }

@@ -1,25 +1,25 @@
 package projetFinal.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import projetFinal.entity.Animal;
 import projetFinal.entity.Localisation;
 import projetFinal.entity.Observation;
 import projetFinal.exception.NoObservationFoundException;
-import projetFinal.exception.NolocalisationFoundException;
-import projetFinal.repository.ObservationRepositery;
+import projetFinal.repository.ObservationRepository;
 
 @Service
 public class ObservationService {
 	@Autowired
-	private ObservationRepositery observationRepository;
+	private ObservationRepository observationRepository;
+	@Autowired
+	AnimalService as;
+
 
 	public boolean ajout(Observation observation) {
 		if (observation.getDateObservation()==null) {
@@ -97,7 +97,6 @@ public class ObservationService {
 		}
 		
 		//supprime l'animal en doublon
-		AnimalService as= new AnimalService();
 		as.suppression(doublon.getId());
 	}
 	

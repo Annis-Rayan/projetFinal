@@ -20,7 +20,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("projetFinal.dao")
+@ComponentScan("projetFinal.service")
 @EnableTransactionManagement
 @PropertySource("classpath:config.properties")
 @EnableJpaRepositories(basePackages = { "projetFinal.repository" })
@@ -60,7 +60,7 @@ public class AppConfig {
 
 	private Properties jpaPoperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create");
 		properties.setProperty("hibernate.dialect", env.getProperty("dialect"));
 		properties.setProperty("hibernate.show_sql", "true");
 		properties.setProperty("hibernate.format_sql", "true");
