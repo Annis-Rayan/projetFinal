@@ -100,6 +100,7 @@ public class ObservationService {
 		as.suppression(doublon.getId());
 	}
 	
+	//TODO
 public void suppressionLocalisationParRegion(String remplacement, String doublon) {
 		
 		//recupere tout les doublons
@@ -110,12 +111,16 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 		
 		
 	    //update les doublons avec le nom
+	    for (Observation observation : listeObservation) {
+			
+		}
 	    
 	    	//si present dans la base :suppression
 	    
 	    
-	    
 	    	//si non present dans la base :maj
+	    
+	    
 	   // for (Observation observation : listeObservation) {
 		//	observation.setAnimal(remplacement);
 		//	miseAjour(observation);
@@ -125,4 +130,9 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 		//AnimalService as= new AnimalService();
 		//as.suppression(doublon.getId());
 	}
+public void suppressionLocalisationParLocalitée(String remplacement, String doublon) {
+	
+}
+}
+
 }
