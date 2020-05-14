@@ -122,7 +122,7 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 	    	Example<Localisation> ex=Example.of(l);
 	    	List<Localisation> listLocalisation = localisationRepository.findAll(ex);
 	    		
-	    		// si le remplacement et la localitée existent déja, supprimer le doublon et relier l'observation
+	    		// si le remplacement et la localitï¿½e existent dï¿½ja, supprimer le doublon et relier l'observation
 	    		for (Localisation localisation : listLocalisation) {
 	    			Localisation loc =new Localisation(doublon,observation.getLocalisation().getLocalite());
 	    	    	Example<Localisation> asuppr=Example.of(loc);
@@ -148,7 +148,7 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 		//AnimalService as= new AnimalService();
 		//as.suppression(doublon.getId());
 	}
-public void suppressionLocalisationParLocalitée(String remplacement, String doublon) {
+public void suppressionLocalisationParLocalite(String remplacement, String doublon) {
 	
 }
 }
