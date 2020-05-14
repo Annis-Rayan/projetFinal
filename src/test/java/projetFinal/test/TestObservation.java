@@ -1,4 +1,4 @@
-package projetFinal.test;
+package ProjetFinal.test;
 
 import static org.junit.Assert.*;
 
@@ -44,7 +44,6 @@ public class TestObservation {
 		InitBdd i=new InitBdd();
 		i.plop(ctx);
 		
-		//ObservationService.ctx=ctx;
 	}
 	
 	@AfterClass
