@@ -11,12 +11,17 @@ import projetFinal.entity.Animal;
 import projetFinal.entity.Localisation;
 import projetFinal.entity.Observation;
 import projetFinal.exception.NoObservationFoundException;
+import projetFinal.repository.LocalisationRepository;
 import projetFinal.repository.ObservationRepository;
 
 @Service
 public class ObservationService {
 	@Autowired
 	private ObservationRepository observationRepository;
+	
+	@Autowired
+	private LocalisationRepository localisationRepository;
+	
 	@Autowired
 	AnimalService as;
 
@@ -110,13 +115,26 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 	    List<Observation> listeObservation = observationRepository.findAll(example);
 		
 		
-	    //update les doublons avec le nom
+	    //cherche de toutes les observations qui contiennent le doublon
 	    for (Observation observation : listeObservation) {
-			
+	    	
+	    	Localisation l =new Localisation(remplacement,observation.getLocalisation().getLocalite());
+	    	Example<Localisation> ex=Example.of(l);
+	    	List<Localisation> listLocalisation = localisationRepository.findAll(ex);
+	    		
+	    		// si le remplacement et la localitée existent déja, supprimer le doublon et relier l'observation
+	    		for (Localisation localisation : listLocalisation) {
+	    			Localisation loc =new Localisation(doublon,observation.getLocalisation().getLocalite());
+	    	    	Example<Localisation> asuppr=Example.of(loc);
+	    	    	List<Localisation> localisationasuppr = localisationRepository.findAll(asuppr);
+	    	    	
+	    	    	
+				}
+	    	//observation.getLocalisation().setRegion(remplacement);
+	    	
 		}
-	    
 	    	//si present dans la base :suppression
-	    
+	    	
 	    
 	    	//si non present dans la base :maj
 	    
@@ -133,6 +151,4 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 public void suppressionLocalisationParLocalitée(String remplacement, String doublon) {
 	
 }
-}
-
 }
