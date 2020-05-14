@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="animal")
-@SequenceGenerator(name="seqAnimal",sequenceName = "seq_ani",initialValue=100,allocationSize=1)
+@SequenceGenerator(name="seqAnimal",sequenceName = "seq_animal",initialValue=100,allocationSize=1)
 public class Animal {
 
 	@Id
