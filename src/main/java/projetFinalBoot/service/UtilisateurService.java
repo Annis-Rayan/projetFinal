@@ -1,6 +1,9 @@
 package projetFinalBoot.service;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +74,23 @@ public class UtilisateurService {
 			return opt.get();
 		}
 		throw new IllegalArgumentException();
+	}
+
+	
+	public List<Utilisateur> rechercheAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Utilisateur save(@Valid Utilisateur utilisateur) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
