@@ -3,6 +3,8 @@ package projetFinalBoot.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -63,13 +65,32 @@ public class LocalisationService {
 		return false;
 	}
 		
-	public List<Localisation> find(String region,String localite) {
+	public List<Localisation> findByRegionAndLocalite(String region,String localite) {
 		
 		Localisation loc=new Localisation();
 		loc.setLocalite(localite);
 		loc.setRegion(region);
 		
 		return locrep.findAll(Example.of(loc));
+	}
+
+	public List<Localisation> findAll() {
+		return locrep.findAll();
+	}
+
+	public void save(@Valid Localisation localisation) {
+		
+		
+	}
+
+	public Optional<Localisation> findById(Integer id) {
+		Optional<Localisation> opt = locrep.findById(id);
+		return null;
+	}
+
+	public Optional<Localisation> deleteById(Integer id) {
+		Optional<Localisation> opt = locrep.deleteById(id);
+		return null;
 	}
 	
 	

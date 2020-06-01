@@ -10,6 +10,10 @@ public class Views {
 
 	}
 
+	public static class LocalisationWithObservation extends Common {
+
+	}
+
 	public static class ObservationWithLocalisation extends Common {
 
 	}
