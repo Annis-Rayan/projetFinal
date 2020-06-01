@@ -111,34 +111,8 @@ public class LocalisationRestController {
 			localisationEnBase.setPays(localisation.getPays());
 			localisationEnBase.setRegion(localisation.getRegion());
 			localisationEnBase.setLocalite(localisation.getLocalite());
-//			if (localisation.getLobserv() != null) {
-//				localisationEnBase.setLobserv(localisation.getLobserv());
-//			}
-//			localisationEnBase = localisationRepository.save(localisationEnBase);
-//			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-//
-//	@GetMapping("/nom/{nom}")
-//	public ResponseEntity<Boolean> checkNom(@PathVariable("nom") String nom) {
-//		Optional<Localisation> opt = localisationService.findByNom(nom);
-//		System.out.println(opt);
-//		if (opt.isPresent()) {
-//			return new ResponseEntity<>(false,HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(true,HttpStatus.OK);
-//		}
-//	}
-//	
-//	@GetMapping("/nom/{nom}")
-//	public ResponseEntity<Boolean> checkNom(@PathVariable("nom") String nom) {
-//		Optional<Localisation> opt = localisationRepository.findByNom(nom);
-//		System.out.println(opt);
-//		if (opt.isPresent()) {
-//			return new ResponseEntity<>(false,HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(true,HttpStatus.OK);
-//		}
-//	}
+
 }

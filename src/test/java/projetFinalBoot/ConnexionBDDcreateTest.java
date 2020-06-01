@@ -19,7 +19,7 @@ import projetFinalBoot.service.UtilisateurService;
 
 
 @SpringBootTest
-@Sql({"/suppr_shema.sql ", "/initbdd.sql"})//TODO inserer utilisateur id=1
+@Sql({"/suppr_shema.sql ", "/initbdd.sql"})//TODO inserer utilisateur,localisation id=1
 public class ConnexionBDDcreateTest {
 	
 	@Autowired

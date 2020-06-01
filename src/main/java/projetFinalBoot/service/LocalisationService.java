@@ -10,13 +10,18 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import projetFinalBoot.entity.Localisation;
+import projetFinalBoot.entity.Observation;
 import projetFinalBoot.repository.LocalisationRepository;
+import projetFinalBoot.repository.ObservationRepository;
 
 @Service
 public class LocalisationService {
 	
 	@Autowired
 	private LocalisationRepository locrep;
+	
+	@Autowired
+	private ObservationRepository observationRepository;
 	
 	public void ajout(Localisation localisation) {
 		if (localisation.getLocalite().isEmpty()) {
@@ -85,12 +90,31 @@ public class LocalisationService {
 
 	public Optional<Localisation> findById(Integer id) {
 		Optional<Localisation> opt = locrep.findById(id);
-		return null;
+		return opt;
 	}
 
-	public Optional<Localisation> deleteById(Integer id) {
-		Optional<Localisation> opt = locrep.deleteById(id);
-		return null;
+	public void deleteById(Integer id) {
+		
+		Optional<Localisation> opt = locrep.findById(id);
+		//si il n'y a pas d'id alors erreur
+		if(!opt.isPresent()) {
+			throw new IllegalArgumentException();
+		}
+		
+		//récuperation des observations faites par l'utilisateur
+		Observation obs=new Observation();
+		obs.setLocalisation(opt.get());
+		Example<Observation> example= Example.of(obs);
+		List<Observation> listeObservation = observationRepository.findAll(example);
+		
+		Localisation l1 = locrep.findById(1).get();
+		 for (Observation observation : listeObservation) {
+				observation.setLocalisation(l1);
+				observationRepository.save(observation);
+			}
+		 
+		 locrep.delete(opt.get());
+		
 	}
 	
 	

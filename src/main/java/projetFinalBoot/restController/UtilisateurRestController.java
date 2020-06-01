@@ -146,7 +146,7 @@ public class UtilisateurRestController {
 			if (utilisateur.getObservations() != null) {
 				utilisateurEnBase.setObservations(utilisateur.getObservations());
 			}
-			utilisateurService.save(utilisateurEnBase);//TODO
+			utilisateurService.save(utilisateurEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);

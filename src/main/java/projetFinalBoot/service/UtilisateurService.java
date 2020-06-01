@@ -32,25 +32,6 @@ public class UtilisateurService {
 		utilisateurRepository.save(utilisateur);
 	}
 	
-	public Utilisateur miseAjour(Utilisateur utilisateur) throws Exception {
-		Optional<Utilisateur> opt = utilisateurRepository.findById(utilisateur.getId());
-		if(opt.isPresent()) {
-			Utilisateur utilisateurEnBase = opt.get();
-			if(utilisateur.getPseudo()!=null) {
-				utilisateurEnBase.setPseudo(utilisateur.getPseudo());
-			}
-
-			utilisateurEnBase.setNom(utilisateur.getNom());
-			utilisateurEnBase.setPrenom(utilisateur.getPrenom());
-			utilisateurEnBase.setImageProfil(utilisateur.getImageProfil());
-			utilisateurRepository.save(utilisateur);
-			return utilisateurEnBase;
-		}else {
-			
-			throw new Exception();
-		}
-		
-	}
 	
 	public Optional<Utilisateur> rechercheById(Integer id) {
 		Optional<Utilisateur> opt = utilisateurRepository.findById(id);
