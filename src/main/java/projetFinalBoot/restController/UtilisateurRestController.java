@@ -26,16 +26,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.entity.views.Views;
-import projetFinalBoot.repository.UtilisateurRepository;
 import projetFinalBoot.service.UtilisateurService;
 
 @RestController
 @RequestMapping("/rest/users")
 @CrossOrigin(origins = "*")
 public class UtilisateurRestController {
-	
-	@Autowired
-	private UtilisateurRepository utilisateurRepository;
 	
 	@Autowired
 	private UtilisateurService utilisateurService;
@@ -86,7 +82,7 @@ public class UtilisateurRestController {
 	@JsonView(Views.UtilisateurWithObservation.class)
 	@GetMapping("/{id}/observation")
 	public ResponseEntity<Utilisateur> findByIdWithObservation(@PathVariable("id") Integer id) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); //error to check with Raph
+		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); 
 		if (opt.isPresent()) {
 			return new ResponseEntity<Utilisateur>(opt.get(), HttpStatus.OK);
 		} else {
@@ -114,7 +110,7 @@ public class UtilisateurRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		utilisateurService.save(utilisateur); // TO DO
+		utilisateurService.save(utilisateur);
 
 		URI uri = uCB.path("/rest/users/{id}").buildAndExpand(utilisateur.getId()).toUri();
 		HttpHeaders headers = new HttpHeaders();
@@ -124,9 +120,9 @@ public class UtilisateurRestController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); //Error to check
+		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); 
 		if (opt.isPresent()) {
-			utilisateurService.deleteById(id); // TO DO
+			utilisateurService.deleteById(id);
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -150,7 +146,7 @@ public class UtilisateurRestController {
 			if (utilisateur.getObservations() != null) {
 				utilisateurEnBase.setObservations(utilisateur.getObservations());
 			}
-			utilisateurEnBase = utilisateurService.save(utilisateurEnBase);
+			utilisateurService.save(utilisateurEnBase);//TODO
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);

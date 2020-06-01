@@ -19,7 +19,7 @@ import projetFinalBoot.service.UtilisateurService;
 
 
 @SpringBootTest
-@Sql({"/suppr_shema.sql ", "/initbdd.sql"})
+@Sql({"/suppr_shema.sql ", "/initbdd.sql"})//TODO inserer utilisateur id=1
 public class ConnexionBDDcreateTest {
 	
 	@Autowired
@@ -49,8 +49,8 @@ public class ConnexionBDDcreateTest {
 	}
 	@Test
 	public void suppressionAnimal() throws Exception {
-		Animal vraiA= animalService.recherche(100);
-		Animal fauxA= animalService.recherche(101);
+		Animal vraiA= animalService.recherchebyId(100);
+		Animal fauxA= animalService.recherchebyId(101);
 		observationService.suppressionAnimal(vraiA, fauxA);
 		//assertFalse(true);
 		

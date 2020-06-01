@@ -6,15 +6,22 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
+import projetFinalBoot.repository.ObservationRepository;
 import projetFinalBoot.repository.UtilisateurRepository;
 
 @Service
 public class UtilisateurService {
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+	
+	@Autowired
+	private ObservationRepository observationRepository;
+	
 	
 	public void ajout(Utilisateur utilisateur) {
 		if(utilisateur.getPseudo().isEmpty()) {
@@ -44,18 +51,18 @@ public class UtilisateurService {
 		
 	}
 	
-	public Utilisateur rechercheById(Integer id) {
+	public Optional<Utilisateur> rechercheById(Integer id) {
 		Optional<Utilisateur> opt = utilisateurRepository.findById(id);
 		if(opt.isPresent()) {
-			return opt.get();
+			return opt;
 		}
 		throw new IllegalArgumentException();
 	}
 	
-	public Utilisateur rechercheByPseudo(String pseudo) {
+	public Optional<Utilisateur> rechercheByPseudo(String pseudo) {
 		Optional<Utilisateur> opt = utilisateurRepository.findByPseudo(pseudo);
 		if(opt.isPresent()) {
-			return opt.get();
+			return opt;
 		}
 		throw new IllegalArgumentException();
 	}
@@ -78,18 +85,26 @@ public class UtilisateurService {
 
 	
 	public List<Utilisateur> rechercheAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return utilisateurRepository.findAll();
 	}
 
-	public Utilisateur save(@Valid Utilisateur utilisateur) {
-		
-		// TODO Auto-generated method stub
-		return null;
+	public void save(@Valid Utilisateur utilisateur) {
+		utilisateurRepository.save(utilisateur);
 	}
 
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		
+		Optional<Utilisateur> opt=utilisateurRepository.findById(id);
+		//si il n'y a pas d'id alors erreur
+		if(!opt.isPresent()) {
+			throw new IllegalArgumentException();
+		}
+		
+		//
+		Observation obs=new Observation();
+		obs.setUtilisateur(opt.get());
+		Example<Observation> example= Example.of(obs);
+	    List<Observation> listeObservation = observationRepository.findAll(example);
 		
 	}
 	

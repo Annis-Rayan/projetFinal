@@ -74,18 +74,10 @@ public class Utilisateur {
 
 	@Version
 	private int version;
-
-	
-	
-	// constructeurs
 	
 	public Utilisateur() {
 	}
 
-
-
-
-	// getters et setters
 
 	public Integer getId() {
 		return id;
@@ -158,40 +150,30 @@ public class Utilisateur {
 	}
 
 
-		
-	//hashCode et equals
-
-
-
-
-
+	
 	public String getPseudo() {
 		return pseudo;
 	}
 
 
-
-
+	
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
 
 
-
-
+	
 	public Set<Observation> getObservations() {
 		return observations;
 	}
 
-
-
+	
 
 	public void setObservations(Set<Observation> observations) {
 		this.observations = observations;
 	}
 
-
-
+	
 
 	@Override
 	public int hashCode() {
@@ -219,8 +201,5 @@ public class Utilisateur {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }
