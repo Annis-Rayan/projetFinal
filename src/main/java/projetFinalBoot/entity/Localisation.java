@@ -35,7 +35,7 @@ import projetFinalBoot.entity.views.Views;
 	@JsonView(Views.Common.class)
 	@Column(name = "Localite", length = 100)
 	private String Localite;
-	@JsonView(Views.Common.class)
+	@JsonView(Views.LocalisationWithObservation.class)
 	@OneToMany(mappedBy = "localisation" )
 	private Set<Observation> lobserv=new HashSet<>();
 	
