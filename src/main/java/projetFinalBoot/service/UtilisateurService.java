@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import projetFinalBoot.entity.Observation;
+import projetFinalBoot.entity.Signalement;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.ObservationRepository;
 import projetFinalBoot.repository.UtilisateurRepository;
@@ -100,12 +101,23 @@ public class UtilisateurService {
 			throw new IllegalArgumentException();
 		}
 		
-		//
+		//récuperation des observations faites par l'utilisateur
 		Observation obs=new Observation();
 		obs.setUtilisateur(opt.get());
 		Example<Observation> example= Example.of(obs);
 	    List<Observation> listeObservation = observationRepository.findAll(example);
 		
+	    //remplacement dans ces observations par l'utilisateur avec l'id 1
+	    Utilisateur u1 = utilisateurRepository.findById(1).get();
+	    for (Observation observation : listeObservation) {
+			observation.setUtilisateur(u1);
+			observationRepository.save(observation);
+		}
+	    
+	    //TODO signalement 
+	    
+	    utilisateurRepository.delete(opt.get());
+	    
 	}
 	
 }
