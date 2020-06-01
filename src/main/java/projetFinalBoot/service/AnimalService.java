@@ -34,7 +34,7 @@ public class AnimalService {
 		animalRepository.save(animal);
 	}
 
-	public Animal miseAjour(Animal animal) throws Exception {
+	public boolean miseAjour(Animal animal) throws Exception {
 		Optional<Animal> opt = animalRepository.findById(animal.getId());
 		//Optional<Animal> opt2 = animalRepository.findByNomCourant(animal.getNomCourant());
 		if (opt.isPresent()) {
@@ -59,10 +59,10 @@ public class AnimalService {
 			}
 			
 			animalRepository.save(animalEnBase);
-			return animal;
+			return true;
 			
 		} else {
-			throw new Exception();
+			return false;
 		}
 		
 		// throw new NoAnimalFoundException()
