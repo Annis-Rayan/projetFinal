@@ -13,12 +13,12 @@ import projetFinalBoot.entity.LoginRole;
 
 
 
-public class Utilisateur implements UserDetails {
+public class UtilisateurLogin implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	private Login login;
 
-	public Utilisateur(Login login) {
+	public UtilisateurLogin(Login login) {
 		this.login = login;
 	}
 
