@@ -65,7 +65,7 @@ public class AnimalService {
 		// throw new NoAnimalFoundException()
 	}
 	
-	public Animal recherche (Integer id)  {
+	public Animal recherchebyId (Integer id)  {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
