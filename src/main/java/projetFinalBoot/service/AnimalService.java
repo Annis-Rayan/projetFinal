@@ -1,6 +1,9 @@
 package projetFinalBoot.service;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,5 +91,30 @@ public class AnimalService {
 
 		}
 		return false;
+	}
+
+	public List<Animal> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void save(@Valid Animal animal) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Optional<Animal> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Optional<Animal> findByNom(String nom) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

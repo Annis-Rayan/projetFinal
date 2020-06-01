@@ -79,7 +79,7 @@ public class LocalisationService {
 	}
 
 	public void save(@Valid Localisation localisation) {
-		
+		locrep.save(localisation);
 		
 	}
 
