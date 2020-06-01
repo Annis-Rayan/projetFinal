@@ -1,17 +1,17 @@
 package projetFinalBoot;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.text.ParseException;
 
-import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import projetFinalBoot.entity.Animal;
-import projetFinalBoot.entity.InitBdd_asupprimer_;
 import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.LocalisationService;
 import projetFinalBoot.service.ObservationService;
@@ -52,8 +52,16 @@ public class ConnexionBDDcreateTest {
 		Animal vraiA= animalService.recherche(100);
 		Animal fauxA= animalService.recherche(101);
 		observationService.suppressionAnimal(vraiA, fauxA);
-		assert(true);
+		//assertFalse(true);
+		
 	}
+	
+	@Test
+	public void miseAjourAnimal() {
+		
+		
+	}
+	
 	
 	
 }

@@ -24,7 +24,7 @@ public class AuthService implements UserDetailsService {
 		if (!opt.isPresent()) {
 			throw new UsernameNotFoundException("utlisateur inconnu");
 		}
-		Utilisateur user = new Utilisateur(opt.get());
+		UtilisateurLogin user = new UtilisateurLogin(opt.get());
 		return user;
 	}
 
