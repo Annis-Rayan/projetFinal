@@ -13,3 +13,12 @@ Quand on supprime un utilisateur, toutes les observations pointant vers cet util
   * home/index
   
 4) gestion signalement
+
+TODO Mardi:
+- Tests unitaires Java (Raph)
+- Finir Services animaux et observations (Raph et Thomas)
+- Redirection bdd avec angular pour animaux, lieux, observations (Jonathan, Thomas)
+- Angular: Utilisateur: ajout, edition, suppression (Annis)
+- Définir plan du site (toutes les pages désirées) (Tout le monde à midi)
+- Système de login et d'inscription (Angular) (Annis)
+
