@@ -1,7 +1,10 @@
 package projetFinalBoot.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -39,7 +42,7 @@ public class ObservationService {
 		return true;
 	}
 
-	public Observation miseAjour(Observation observation) throws Exception {
+	public boolean miseAjour(Observation observation) throws Exception {
 		Optional<Observation> opt = observationRepository.findById(observation.getId());
 		if (opt.isPresent()) {
 			Observation observationEnBase = opt.get();
@@ -62,10 +65,11 @@ public class ObservationService {
 				observationEnBase.setAnimal(observation.getAnimal());
 			}
 			observationRepository.save(observationEnBase);
-			return observationEnBase;
-		} else {
-			throw new Exception();
-		}
+			return true;
+			
+		} 
+			return false;
+		
 	}
 
 	public Observation recherche(Integer id) {
@@ -75,6 +79,15 @@ public class ObservationService {
 		}
 		throw new IllegalArgumentException();
 	}
+	
+	public List<Observation> recherche(Date dateObservation) {
+		Observation obs = new Observation();
+		obs.setDateObservation(dateObservation);
+		Example<Observation> example = Example.of(obs);
+		return observationRepository.findAll(example);
+		
+	}
+	
 	
 	public boolean suppression(Integer id){
 		Optional<Observation> opt = observationRepository.findById(id);
@@ -148,6 +161,26 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 		//as.suppression(doublon.getId());
 	}
 public void suppressionLocalisationParLocalite(String remplacement, String doublon) {
+	
+}
+
+public List<Observation> findAll() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public void save(@Valid Observation observation) {
+	// TODO Auto-generated method stub
+	
+}
+
+public Optional<Observation> findById(Integer id) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public void deleteById(Integer id) {
+	// TODO Auto-generated method stub
 	
 }
 }
