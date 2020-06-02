@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import projetFinalBoot.entity.Animal;
@@ -19,7 +20,7 @@ public class AnimalService {
 	@Autowired
 	private AnimalRepository animalRepository;
 
-	public void ajout(Animal animal) {
+	public void save(Animal animal) {
 		
 		if (animal.getNomScientifique()==null || animal.getNomScientifique().isEmpty()) {
 			animal.setNomScientifique("non defini");
@@ -34,7 +35,7 @@ public class AnimalService {
 		animalRepository.save(animal);
 	}
 
-	public boolean miseAjour(Animal animal) throws Exception {
+	public boolean update(Animal animal) throws Exception {
 		Optional<Animal> opt = animalRepository.findById(animal.getId());
 		//Optional<Animal> opt2 = animalRepository.findByNomCourant(animal.getNomCourant());
 		if (opt.isPresent()) {
@@ -64,11 +65,9 @@ public class AnimalService {
 		} else {
 			return false;
 		}
-		
-		// throw new NoAnimalFoundException()
 	}
 	
-	public Animal recherchebyId (Integer id)  {
+	public Animal findbyId (Integer id)  {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
@@ -81,8 +80,7 @@ public class AnimalService {
 				
 	} 
 	
-	public boolean suppression(Integer id) {
-		
+	public boolean deletebyId(Integer id) {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
@@ -94,27 +92,26 @@ public class AnimalService {
 	}
 
 	public List<Animal> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return animalRepository.findAll();
 	}
-
-	public void save(@Valid Animal animal) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 
 	public Optional<Animal> findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Animal> opt = animalRepository.findById(id);
+		if (opt.isPresent()) {
+			return opt;
+		}
+		else {
+			throw new IllegalArgumentException();
+		}		
 	}
 
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+	public List<Animal> findByNom(String nom) {
 		
-	}
-
-	public Optional<Animal> findByNom(String nom) {
-		// TODO Auto-generated method stub
-		return null;
+		Animal ani = new Animal();
+		ani.setNomCourant(nom);
+		Example<Animal> example = Example.of(ani);
+		return animalRepository.findAll(example);
 	}
 }

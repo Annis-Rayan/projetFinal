@@ -1,10 +1,9 @@
 package projetFinalBoot;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.text.ParseException;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +48,10 @@ public class ConnexionBDDcreateTest {
 	}
 	@Test
 	public void suppressionAnimal() throws Exception {
-		Animal vraiA= animalService.recherchebyId(100);
-		Animal fauxA= animalService.recherchebyId(101);
+		Animal vraiA= animalService.findbyId(100);
+		Animal fauxA= animalService.findbyId(101);
 		observationService.suppressionAnimal(vraiA, fauxA);
-		//assertFalse(true);
+		assertFalse(true);
 		
 	}
 	
