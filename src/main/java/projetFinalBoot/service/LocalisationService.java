@@ -23,14 +23,14 @@ public class LocalisationService {
 	@Autowired
 	private ObservationRepository observationRepository;
 	
-	public void ajout(Localisation localisation) {
+	public void save(Localisation localisation) {
 		if (localisation.getLocalite().isEmpty()) {
 			localisation.setLocalite("non defini");
 		}
 		locrep.save(localisation);
 	}
 	
-	public Localisation miseAjour(Localisation localisation) throws Exception {
+	public Localisation update(Localisation localisation) throws Exception {
 		Optional<Localisation> opt = locrep.findById(localisation.getID());
 		if (opt.isPresent()) {
 			Localisation locenbase = opt.get();
@@ -52,15 +52,12 @@ public class LocalisationService {
 
 	}
 	
-	public Localisation recherche(Integer id) {
-		Optional<Localisation> opt=locrep.findById(id);
-		if(opt.isPresent()) {
-			return opt.get();
-		}
-		throw new IllegalArgumentException();
+	public Optional<Localisation> findById(Integer id) {
+		return locrep.findById(id);
+
 	}
 	
-	public boolean suppression(Integer id){
+	public boolean delete(Integer id){
 		Optional<Localisation> opt = locrep.findById(id);
 		if (opt.isPresent()) {
 			locrep.deleteById(id);
@@ -83,16 +80,8 @@ public class LocalisationService {
 		return locrep.findAll();
 	}
 
-	public void save(@Valid Localisation localisation) {
-		locrep.save(localisation);
-		
-	}
-
-	public Optional<Localisation> findById(Integer id) {
-		Optional<Localisation> opt = locrep.findById(id);
-		return opt;
-	}
-
+	
+	
 	public void deleteById(Integer id) {
 		
 		Optional<Localisation> opt = locrep.findById(id);

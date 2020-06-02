@@ -28,7 +28,7 @@ public class ObservationService {
 	AnimalService as;
 
 
-	public boolean ajout(Observation observation) {
+	public boolean save(Observation observation) {
 		if (observation.getDateObservation()==null) {
 			return false;
 		}
@@ -42,7 +42,7 @@ public class ObservationService {
 		return true;
 	}
 
-	public boolean miseAjour(Observation observation) throws Exception {
+	public boolean update(Observation observation) throws Exception {
 		Optional<Observation> opt = observationRepository.findById(observation.getId());
 		if (opt.isPresent()) {
 			Observation observationEnBase = opt.get();
@@ -72,15 +72,12 @@ public class ObservationService {
 		
 	}
 
-	public Observation recherche(Integer id) {
-		Optional<Observation> opt=observationRepository.findById(id);
-		if(opt.isPresent()) {
-			return opt.get();
-		}
-		throw new IllegalArgumentException();
+	public Optional<Observation> findById(Integer id) {
+		return observationRepository.findById(id);
+		
 	}
 	
-	public List<Observation> recherche(Date dateObservation) {
+	public List<Observation> FindByDate(Date dateObservation) {
 		Observation obs = new Observation();
 		obs.setDateObservation(dateObservation);
 		Example<Observation> example = Example.of(obs);
@@ -89,7 +86,7 @@ public class ObservationService {
 	}
 	
 	
-	public boolean suppression(Integer id){
+	public boolean delete(Integer id){
 		Optional<Observation> opt = observationRepository.findById(id);
 		if (opt.isPresent()) {
 			observationRepository.deleteById(id);
@@ -98,7 +95,7 @@ public class ObservationService {
 		return false;
 	}
 	
-	public void suppressionAnimal(Animal remplacement, Animal doublon) throws Exception {
+	public void deleteAnimalDoublon(Animal remplacement, Animal doublon) throws Exception {
 		
 		//recupere tout les doublons
 		Observation obs=new Observation();
@@ -110,7 +107,7 @@ public class ObservationService {
 	    //update les doublons avec le nom
 	    for (Observation observation : listeObservation) {
 			observation.setAnimal(remplacement);
-			miseAjour(observation);
+			update(observation);
 		}
 		
 		//supprime l'animal en doublon
@@ -118,7 +115,7 @@ public class ObservationService {
 	}
 	
 	//TODO
-public void suppressionLocalisationParRegion(String remplacement, String doublon) {
+public void deleteLocalisationParRegion(String remplacement, String doublon) {
 		
 		//recupere tout les doublons
 		Observation obs=new Observation();
@@ -160,27 +157,18 @@ public void suppressionLocalisationParRegion(String remplacement, String doublon
 		//AnimalService as= new AnimalService();
 		//as.suppression(doublon.getId());
 	}
-public void suppressionLocalisationParLocalite(String remplacement, String doublon) {
+public void deleteLocalisationParLocalite(String remplacement, String doublon) {
 	
 }
 
 public List<Observation> findAll() {
-	// TODO Auto-generated method stub
-	return null;
+	return observationRepository.findAll();
 }
 
-public void save(@Valid Observation observation) {
-	// TODO Auto-generated method stub
-	
-}
 
-public Optional<Observation> findById(Integer id) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 public void deleteById(Integer id) {
-	// TODO Auto-generated method stub
+	observationRepository.delete(observationRepository.getOne(id));
 	
 }
 }

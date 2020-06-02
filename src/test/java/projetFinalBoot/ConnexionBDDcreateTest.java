@@ -51,7 +51,7 @@ public class ConnexionBDDcreateTest {
 		Animal vraiA= animalService.findById(100).get();
 		Animal fauxA= animalService.findById(101).get();
 		observationService.suppressionAnimal(vraiA, fauxA);
-		//assertFalse(true);
+		assertFalse(true);
 		
 	}
 	

@@ -47,8 +47,8 @@ public class ObservationRestController {
 	
 	@JsonView(Views.Common.class)
 	@GetMapping("/{dateObservation}")
-	public ResponseEntity<List<Observation>> findByDateObservation(@PathVariable("dateObservation") Date dateObservation) {
-		List<Observation> listObs = observationService.recherche(dateObservation);
+	public ResponseEntity<List<Observation>> FindByDate(@PathVariable("dateObservation") Date dateObservation) {
+		List<Observation> listObs = observationService.FindByDate(dateObservation);
 			return new ResponseEntity<List<Observation>>(listObs, HttpStatus.OK);
 		
 	}
@@ -142,7 +142,7 @@ public class ObservationRestController {
 		if (br.hasErrors())
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
-		if (observationService.miseAjour(observation)) 
+		if (observationService.update(observation)) 
 			return new ResponseEntity<>(HttpStatus.OK);
 		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
