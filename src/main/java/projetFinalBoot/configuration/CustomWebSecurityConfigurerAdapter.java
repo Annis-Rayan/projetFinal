@@ -35,9 +35,9 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous()
 			.and()
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic()
+			.authorizeRequests().antMatchers("/rest/**").permitAll()
 			.and()
-			.authorizeRequests().anyRequest().permitAll(); 
+			.authorizeRequests().anyRequest().permitAll(); //
 //		http.authorizeRequests()
 //			.antMatchers("/").permitAll()
 //			.antMatchers("/bootstrap/**").permitAll()
