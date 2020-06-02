@@ -24,6 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import projetFinalBoot.entity.TypeUtilisateur;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.entity.views.Views;
 import projetFinalBoot.service.UtilisateurService;
@@ -67,15 +68,15 @@ public class UtilisateurRestController {
 	//findByPseudo
 	
 	@JsonView(Views.Common.class)
-	@GetMapping("/{pseudo}")
-	public ResponseEntity<Utilisateur> findByPseudo(@PathVariable("pseudo") String pseudo) {
+	@GetMapping("/nom/{pseudo}")
+	public ResponseEntity<Boolean> findByPseudo(@PathVariable("pseudo") String pseudo) {
 		try {
 			Optional<Utilisateur> opt = utilisateurService.rechercheByPseudo(pseudo); // Error to check with Raph
 			
-			return new ResponseEntity<Utilisateur>(opt.get(), HttpStatus.OK);
+			return new ResponseEntity<>(false, HttpStatus.OK);
 			
 		} catch (IllegalArgumentException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(true, HttpStatus.NOT_FOUND);
 		}
 		
 		
@@ -114,6 +115,7 @@ public class UtilisateurRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
+		utilisateur.setType(TypeUtilisateur.USER);
 		utilisateurService.save(utilisateur);
 
 		URI uri = uCB.path("/rest/users/{id}").buildAndExpand(utilisateur.getId()).toUri();

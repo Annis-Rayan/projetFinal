@@ -75,7 +75,8 @@ public class LocalisationService {
 		
 		return locrep.findAll(Example.of(loc));
 	}
-
+	
+	//TODO enlever id=1
 	public List<Localisation> findAll() {
 		return locrep.findAll();
 	}
