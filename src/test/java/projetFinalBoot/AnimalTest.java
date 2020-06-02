@@ -1,10 +1,7 @@
 package projetFinalBoot;
 
-import java.text.ParseException;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +14,10 @@ import projetFinalBoot.service.ObservationService;
 import projetFinalBoot.service.UtilisateurService;
 
 
+
 @SpringBootTest
-@Sql({"/suppr_shema.sql ", "/initbdd.sql"})//TODO inserer utilisateur,localisation id=1
-public class ConnexionBDDcreateTest {
+@Sql({"/suppr_shema.sql ", "/initbdd.sql"})
+public class AnimalTest {
 	
 	@Autowired
 	private ObservationService observationService;
@@ -30,24 +28,50 @@ public class ConnexionBDDcreateTest {
 	@Autowired
 	private AnimalService animalService;
 	
-	@BeforeAll
-	public static void initSpring() throws ParseException
-	{	
+	@Test
+	public void findByIdTest() {
+		
+		
 	}
 	
 	@Test
-	public void find() {
-		assert(observationService.findById(100)!=null);
+	public void findByNomTest() {
 		
-		try {
-			observationService.findById(2000);
-		} catch (IllegalArgumentException e) {
-			assert(true);
-			
-		}
+		
 	}
 	
+	@Test
+	public void saveAnimalTest() {
+		
+		
+	}
 	
+	@Test
+	public void deleteAnimalDoublonTest() throws Exception {
+		Animal vraiA= animalService.findById(100).get();
+		Animal fauxA= animalService.findById(101).get();
+		observationService.deleteAnimalDoublon(vraiA, fauxA);
+		assertFalse(true);
+		
+	}
+	
+	@Test
+	public void updateAnimalTest() {
+		
+		
+	}
+	
+	@Test
+	public void deleteAnimalTest() {
+		
+		
+	}
+	
+	@Test
+	public void findAllAnimalTest() {
+		
+		
+	}
 	
 	
 }

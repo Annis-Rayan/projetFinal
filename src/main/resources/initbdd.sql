@@ -1,5 +1,13 @@
 INSERT INTO public.localisation(
 	id_localisation, localite, pays, region)
+	VALUES (1, 'nd', 'nd', 'nd');
+
+INSERT INTO public.utilisateur(
+	id_utilisateur, photo_profil, nom, prenom, pseudo, type, version)
+	VALUES (1, null, 'nd', 'nd', 'compte fermé', 'USER', 1);
+
+INSERT INTO public.localisation(
+	id_localisation, localite, pays, region)
 	VALUES (100, 'france', 'normandie', 'petaouch');
 
 INSERT INTO public.utilisateur(
