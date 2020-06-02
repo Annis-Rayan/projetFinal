@@ -23,6 +23,7 @@ public class ConsoleService implements CommandLineRunner {
 		for(Login login:loginRepository.findAll()) {
 			login.setPassword(passwordEncoder.encode(login.getPassword()));
 			loginRepository.save(login);
+			System.out.println(login.getPassword());
 		}
 		
 	}

@@ -37,6 +37,8 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous()
 			.and()
 			.csrf().disable()
+			.authorizeRequests().antMatchers("/rest/inscription","/rest/inscription/**").permitAll()
+			.and()
 			.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic()
 			.and()
 			.authorizeRequests().anyRequest().permitAll(); //
@@ -66,6 +68,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.withUser("user").password("user").roles("USER");
 		
 		auth.jdbcAuthentication().dataSource(dataSource)
+			.passwordEncoder(passwordEncoder())
 			.usersByUsernameQuery("select username,password,enable from login where username=?")
 			.authoritiesByUsernameQuery("select username,role from login_role where username=?");
 		
