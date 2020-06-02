@@ -37,10 +37,10 @@ public class ConnexionBDDcreateTest {
 	
 	@Test
 	public void find() {
-		assert(observationService.recherche(100)!=null);
+		assert(observationService.findById(100)!=null);
 		
 		try {
-			observationService.recherche(2000);
+			observationService.findById(2000);
 		} catch (IllegalArgumentException e) {
 			assert(true);
 			
@@ -50,7 +50,7 @@ public class ConnexionBDDcreateTest {
 	public void suppressionAnimal() throws Exception {
 		Animal vraiA= animalService.findById(100).get();
 		Animal fauxA= animalService.findById(101).get();
-		observationService.suppressionAnimal(vraiA, fauxA);
+		observationService.deleteAnimalDoublon(vraiA, fauxA);
 		assertFalse(true);
 		
 	}
