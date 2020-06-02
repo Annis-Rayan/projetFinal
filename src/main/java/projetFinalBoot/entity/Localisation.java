@@ -25,16 +25,16 @@ import projetFinalBoot.entity.views.Views;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqlocalisation")
 	@Column(name = "id_localisation")
-	private Integer ID;
+	private Integer id;
 	@JsonView(Views.Common.class)
 	@Column(name = "Pays", length = 50, nullable = false)
-	private String Pays;
+	private String pays;
 	@JsonView(Views.Common.class)
 	@Column(name = "Region", length = 100, nullable = false)
-	private String Region;
+	private String region;
 	@JsonView(Views.Common.class)
 	@Column(name = "Localite", length = 100)
-	private String Localite;
+	private String localite;
 	@JsonView(Views.LocalisationWithObservation.class)
 	@OneToMany(mappedBy = "localisation" )
 	private Set<Observation> lobserv=new HashSet<>();
@@ -45,42 +45,42 @@ import projetFinalBoot.entity.views.Views;
 
 
 	public String getPays() {
-		return Pays;
+		return pays;
 	}
 
 
 	public void setPays(String pays) {
-		Pays = pays;
+		pays = pays;
 	}
 
 
 	public String getRegion() {
-		return Region;
+		return region;
 	}
 
 
 	public void setRegion(String region) {
-		Region = region;
+		region = region;
 	}
 
 
 	public String getLocalite() {
-		return Localite;
+		return localite;
 	}
 
 
 	public void setLocalite(String localite) {
-		Localite = localite;
+		localite = localite;
 	}
 
 
 	public Integer getID() {
-		return ID;
+		return id;
 	}
 
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public void setID(Integer id) {
+		id = id;
 	}
 
 	public Set<Observation> getLobserv() {
@@ -97,7 +97,7 @@ import projetFinalBoot.entity.views.Views;
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ID;
+		result = prime * result + id;
 		return result;
 	}
 
@@ -111,7 +111,7 @@ import projetFinalBoot.entity.views.Views;
 		if (getClass() != obj.getClass())
 			return false;
 		Localisation other = (Localisation) obj;
-		if (ID != other.ID)
+		if (id != other.id)
 			return false;
 		return true;
 	}
@@ -119,8 +119,8 @@ import projetFinalBoot.entity.views.Views;
 
 	public Localisation(String region, String localite) {
 		super();
-		Region = region;
-		Localite = localite;
+		region = region;
+		localite = localite;
 	}
 	
 	
