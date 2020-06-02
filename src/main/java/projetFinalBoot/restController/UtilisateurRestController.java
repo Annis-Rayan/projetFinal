@@ -69,12 +69,16 @@ public class UtilisateurRestController {
 	@JsonView(Views.Common.class)
 	@GetMapping("/{pseudo}")
 	public ResponseEntity<Utilisateur> findByPseudo(@PathVariable("pseudo") String pseudo) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheByPseudo(pseudo); // Error to check with Raph
-		if (opt.isPresent()) {
+		try {
+			Optional<Utilisateur> opt = utilisateurService.rechercheByPseudo(pseudo); // Error to check with Raph
+			
 			return new ResponseEntity<Utilisateur>(opt.get(), HttpStatus.OK);
-		} else {
+			
+		} catch (IllegalArgumentException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
+		
 	}
 	
 	//findbyIdwithobs

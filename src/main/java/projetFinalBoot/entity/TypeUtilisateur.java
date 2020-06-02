@@ -1,7 +1,7 @@
 package projetFinalBoot.entity;
 
 public enum TypeUtilisateur {
-	U("utilisateur"),
+	USER("utilisateur"),
 	A("adherent"),
 	ADMIN("administrateur");
 	
