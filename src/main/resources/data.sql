@@ -12,7 +12,7 @@ INSERT INTO public.localisation(
 
 INSERT INTO public.utilisateur(
 	id_utilisateur, photo_profil, nom, prenom, pseudo, type, version)
-	VALUES (nextval('seq_utilisateur.nextval'), null, null, null, 'annis', 'ADMIN', 1);
+	VALUES (nextval('seq_utilisateur'), null, null, null, 'annis', 'ADMIN', 1);
 	
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
@@ -29,14 +29,14 @@ INSERT INTO public.animal(
 	
 INSERT INTO public.observation(
 	id_observation, date_observation, description, nombre, animal, localisation, utilisateur)
-	VALUES (seq_obs.nextval, '31-12-1998', 'c est un chat  qui court', 3, 100, 100, 100);
+	VALUES (nextval('seq_obs'), '31-12-1998', 'c est un chat  qui court', 3, 100, 100, 100);
 
 INSERT INTO public.observation(
 	id_observation, date_observation, description, nombre, animal, localisation, utilisateur)
-	VALUES (seq_obs.nextval, '31-12-1998', 'c est un chien  qui court', 3, 101, 100, 100);
+	VALUES (nextval('seq_obs'), '31-12-1998', 'c est un chien  qui court', 3, 101, 100, 100);
 	
 	INSERT INTO public.observation(
 	id_observation, date_observation, description, nombre, animal, localisation, utilisateur)
-	VALUES (seq_obs.nextval, '31-12-1998', 'c est une souris qui court', 3, 102, 100, 100);
+	VALUES (nextval('seq_obs'), '31-12-1998', 'c est une souris qui court', 3, 102, 100, 100);
 	
 	
