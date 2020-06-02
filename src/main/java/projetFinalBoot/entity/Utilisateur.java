@@ -1,5 +1,6 @@
 package projetFinalBoot.entity;
 
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,7 +52,7 @@ public class Utilisateur {
 	
 	@JsonView(Views.Common.class)
 	@Column(name = "photo_profil", length = 50)
-	private String imageProfil;
+	private Blob imageProfil;
 	
 	@JsonView(Views.Common.class)
 	@Column(name = "type", length = 5, nullable = false)
@@ -115,13 +116,13 @@ public class Utilisateur {
 
 
 
-	public String getImageProfil() {
+	public Blob getImageProfil() {
 		return imageProfil;
 	}
 
 
 
-	public void setImageProfil(String imageProfil) {
+	public void setImageProfil(Blob imageProfil) {
 		this.imageProfil = imageProfil;
 	}
 
