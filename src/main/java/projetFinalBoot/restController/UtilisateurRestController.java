@@ -76,7 +76,7 @@ public class UtilisateurRestController {
 			return new ResponseEntity<>(false, HttpStatus.OK);
 			
 		} catch (IllegalArgumentException e) {
-			return new ResponseEntity<>(true, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(true, HttpStatus.OK);
 		}
 		
 		
