@@ -42,10 +42,11 @@ public class LocalisationService {
 		localisationRepository.save(localisation);
 	}
 
+	
+	
 	public boolean update(Localisation localisation) throws Exception {
-		
 		Optional<Localisation> opt = localisationRepository.findById(localisation.getId());
-		//Optional<Localisation> opt2 = localisationRepository.findByNomCourant(localisation.getNomCourant());
+		
 		if (opt.isPresent()) {
 			Localisation localisationEnBase = opt.get();
 			
@@ -62,12 +63,13 @@ public class LocalisationService {
 			
 			localisationRepository.save(localisationEnBase);
 			return true;
-			
+
 		} else {
 			return false;
 		}
 	}
 	
+
 	public Optional<Localisation> findById (Integer id)  {
 		Optional<Localisation> opt = localisationRepository.findById(id);
 		if (opt.isPresent()) {
@@ -94,7 +96,7 @@ public class LocalisationService {
 			}
 			
 			
-			
+	
 			localisationRepository.deleteById(id);
 			return true;
 
@@ -102,11 +104,22 @@ public class LocalisationService {
 		return false;
 	}
 
+		
+	public List<Localisation> findByRegionAndLocalite(String region,String localite) {
+		
+		Localisation loc=new Localisation();
+		loc.setLocalite(localite);
+		loc.setRegion(region);
+		
+		return localisationRepository.findAll(Example.of(loc));
+	}
+
 	public List<Localisation> findAll() {
 		return localisationRepository.findAll();
 	}
 
 	
+
 
 	public List<Localisation> findByPays(String pays) {
 		
@@ -117,11 +130,13 @@ public class LocalisationService {
 	}
 	public List<Localisation> findByRegion(String region) {
 		
+
 		Localisation loc = new Localisation();
 		loc.setRegion(region);
 		Example<Localisation> example = Example.of(loc);
 		return localisationRepository.findAll(example);
 	}
+	
 	public List<Localisation> findLocalite(String localite) {
 		
 		Localisation loc = new Localisation();
