@@ -20,8 +20,7 @@ INSERT INTO public.animal(
 	
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
-	VALUES (98, 'cest un chien', null, 'chien', null, null);	
-
+	VALUES (98, 'cest un chien', null, 'chien', 'nom courant_chien',null);	
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
 	VALUES (97, 'cest un souris', null, 'souris', null, null);	

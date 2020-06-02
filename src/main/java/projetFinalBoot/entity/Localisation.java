@@ -38,70 +38,43 @@ import projetFinalBoot.entity.views.Views;
 	@JsonView(Views.LocalisationWithObservation.class)
 	@OneToMany(mappedBy = "localisation" )
 	private Set<Observation> lobserv=new HashSet<>();
-	
-	public Localisation() {
-		super();
-	} 
-
-
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getPays() {
 		return pays;
 	}
-
-
 	public void setPays(String pays) {
-		pays = pays;
+		this.pays = pays;
 	}
-
-
 	public String getRegion() {
 		return region;
 	}
-
-
 	public void setRegion(String region) {
-		region = region;
+		this.region = region;
 	}
-
-
 	public String getLocalite() {
 		return localite;
 	}
-
-
 	public void setLocalite(String localite) {
-		localite = localite;
+		this.localite = localite;
 	}
-
-
-	public Integer getID() {
-		return id;
-	}
-
-
-	public void setID(Integer id) {
-		id = id;
-	}
-
 	public Set<Observation> getLobserv() {
 		return lobserv;
 	}
-
-
 	public void setLobserv(Set<Observation> lobserv) {
 		this.lobserv = lobserv;
 	}
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,10 +84,31 @@ import projetFinalBoot.entity.views.Views;
 		if (getClass() != obj.getClass())
 			return false;
 		Localisation other = (Localisation) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	public Localisation(Integer id, String pays, String region, String localite, Set<Observation> lobserv) {
+		super();
+		this.id = id;
+		this.pays = pays;
+		this.region = region;
+		this.localite = localite;
+		this.lobserv = lobserv;
+	}
+	public Localisation(Integer id, String pays, String region, String localite) {
+		super();
+		this.id = id;
+		this.pays = pays;
+		this.region = region;
+		this.localite = localite;
+	}
+	public Localisation() {
+		
+	}	
 
 
 	public Localisation(String region, String localite) {

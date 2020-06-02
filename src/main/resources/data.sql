@@ -4,7 +4,7 @@ INSERT INTO public.localisation(
 
 INSERT INTO public.utilisateur(
 	id_utilisateur, photo_profil, nom, prenom, pseudo, type, version)
-	VALUES (1, null, 'nd', 'nd', 'compte fermé', 'USER', 1);
+	VALUES (1, null, 'nd', null,'compte fermé', 'USER', 1);
 
 INSERT INTO public.localisation(
 	id_localisation, pays, localite, region)
@@ -16,7 +16,7 @@ INSERT INTO public.utilisateur(
 	
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
-	VALUES (nextval('seq_animal'), 'cest un chat', null, 'chat', null, null);	
+	VALUES (nextval('seq_animal'), 'cest un chat', null, 'chat', 'chat nom courant',null);	
 	
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)

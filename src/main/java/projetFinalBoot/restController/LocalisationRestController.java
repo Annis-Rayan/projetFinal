@@ -34,20 +34,23 @@ import projetFinalBoot.service.LocalisationService;
 @RequestMapping("/rest/localisation")
 @CrossOrigin(origins = "*")
 public class LocalisationRestController {
-
+	
+	
+	
 	@Autowired
-	private LocalisationService localisationService;
-
+	LocalisationService localisationService;
+	
 	@JsonView(Views.Common.class)
 	@GetMapping({ "", "/" })
 	public ResponseEntity<List<Localisation>> findAll() {
+		
 		List<Localisation> list = localisationService.findAll();
 		return new ResponseEntity<List<Localisation>>(list, HttpStatus.OK);
 	}
 
 	@JsonView(Views.LocalisationWithObservation.class)
 	@GetMapping("/observation")
-	public ResponseEntity<List<Localisation>> findAllWithObservation() {
+	public ResponseEntity<List<Localisation>> findAllWithobservation() {
 		List<Localisation> list = localisationService.findAll();
 		return new ResponseEntity<List<Localisation>>(list, HttpStatus.OK);
 	}
@@ -60,7 +63,7 @@ public class LocalisationRestController {
 		}
 		localisationService.save(localisation);
 
-		URI uri = uCB.path("/rest/localisation/{id}").buildAndExpand(localisation.getID()).toUri();
+		URI uri = uCB.path("/rest/localisation/{id}").buildAndExpand(localisation.getId()).toUri();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(uri);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -79,7 +82,7 @@ public class LocalisationRestController {
 
 	@JsonView(Views.LocalisationWithObservation.class)
 	@GetMapping("/{id}/observation")
-	public ResponseEntity<Localisation> findByIdWithStagiaire(@PathVariable("id") Integer id) {
+	public ResponseEntity<Localisation> findByIdWithObservation(@PathVariable("id") Integer id) {
 		Optional<Localisation> opt = localisationService.findById(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Localisation>(opt.get(), HttpStatus.OK);
@@ -93,6 +96,7 @@ public class LocalisationRestController {
 		Optional<Localisation> opt = localisationService.findById(id);
 		if (opt.isPresent()) {
 			localisationService.deleteById(id);
+			
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -101,18 +105,16 @@ public class LocalisationRestController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody Localisation localisation, BindingResult br,
-			@PathVariable("id") Integer id) {
-		if (br.hasErrors()) {
+			@PathVariable("id") Integer id) throws Exception {
+		
+		if (br.hasErrors())
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		Optional<Localisation> opt = localisationService.findById(id);
-		if (opt.isPresent()) {
-			Localisation localisationEnBase = opt.get();
-			localisationEnBase.setPays(localisation.getPays());
-			localisationEnBase.setRegion(localisation.getRegion());
-			localisationEnBase.setLocalite(localisation.getLocalite());
-		}
+		
+		if (localisationService.update(localisation)) 
+			return new ResponseEntity<>(HttpStatus.OK);
+		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+		 
+	}		
 
 }
