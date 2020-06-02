@@ -10,7 +10,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import projetFinalBoot.entity.Animal;
+import projetFinalBoot.entity.Observation;
 import projetFinalBoot.repository.AnimalRepository;
+import projetFinalBoot.repository.ObservationRepository;
 
 
 
@@ -19,6 +21,9 @@ public class AnimalService {
 
 	@Autowired
 	private AnimalRepository animalRepository;
+	
+	@Autowired
+	private ObservationRepository observationRepository;
 
 	public void save(Animal animal) {
 		
@@ -68,7 +73,6 @@ public class AnimalService {
 	}
 	
 	public Optional<Animal> findById (Integer id)  {
-		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
 			return opt;
@@ -84,6 +88,17 @@ public class AnimalService {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
+			
+			Observation obs  = new Observation();
+			obs.setAnimal(opt.get());
+			Example<Observation> example = Example.of(obs);
+			List<Observation> listeobs =observationRepository.findAll(example);
+			for (Observation observation : listeobs) {
+				observationRepository.delete(observation);
+			}
+			
+			
+			
 			animalRepository.deleteById(id);
 			return true;
 

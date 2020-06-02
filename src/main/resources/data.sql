@@ -7,7 +7,7 @@ INSERT INTO public.utilisateur(
 	VALUES (1, null, 'nd', 'nd', 'compte fermé', 'USER', 1);
 
 INSERT INTO public.localisation(
-	id_localisation, localite, pays, region)
+	id_localisation, pays, localite, region)
 	VALUES (nextval('seq_localisation'), 'france', 'normandie', 'petaouch');
 
 INSERT INTO public.utilisateur(

@@ -1,6 +1,6 @@
 package projetFinalBoot;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.service.AnimalService;
-import projetFinalBoot.service.LocalisationService;
 import projetFinalBoot.service.ObservationService;
-import projetFinalBoot.service.UtilisateurService;
 
 
 
@@ -22,54 +20,102 @@ public class AnimalTest {
 	@Autowired
 	private ObservationService observationService;
 	@Autowired
-	private LocalisationService localisationService;
-	@Autowired
-	private UtilisateurService utilisateurService;
-	@Autowired
 	private AnimalService animalService;
 	
 	@Test
 	public void findByIdTest() {
+		assertTrue(animalService.findById(99)!=null);
 		
+		try {
+			animalService.findById(2000);
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+			
+		}
 		
 	}
 	
 	@Test
 	public void findByNomTest() {
+		assertTrue(animalService.findByNom("chat")!=null);
 		
-		
+		int x=0;
+			try {
+			x=animalService.findByNom("plop").size();
+			
+			
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+			
+		}
+			
+		assertEquals(x,0);
+
 	}
 	
 	@Test
 	public void saveAnimalTest() {
+		Animal a = new Animal();
+		a.setDescription("ouiii");
+		a.setNomCourant("mouche");
+		animalService.save(a);
 		
-		
+		Animal a2=animalService.findByNom("mouche").get(0);
+		assertEquals("non defini", a2.getNomScientifique());
+		assertEquals("mouche", a2.getNomCourant());
 	}
 	
 	@Test
 	public void deleteAnimalDoublonTest() throws Exception {
-		Animal vraiA= animalService.findById(100).get();
-		Animal fauxA= animalService.findById(101).get();
+		Animal vraiA= animalService.findById(99).get();
+		Animal fauxA= animalService.findById(98).get();
 		observationService.deleteAnimalDoublon(vraiA, fauxA);
-		assertFalse(true);
+		
+		try {
+			animalService.findById(98);
+			
+			assertTrue(false);
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
+		
+		assertEquals(observationService.findById(98).get().getAnimal().getId(),99);
+		
 		
 	}
 	
 	@Test
 	public void updateAnimalTest() {
+		Animal a = animalService.findById(99).get();
+		a.setDescription("bbb");
+		try {
+			animalService.update(a);
+		} catch (Exception e) {
+			
+			assertTrue(false);
+		}
 		
-		
+		assertEquals("bbb", animalService.findById(99).get().getDescription());
 	}
 	
 	@Test
 	public void deleteAnimalTest() {
+		animalService.deleteById(99);
+		Animal a = new Animal();
+		try {
+		a= animalService.findById(99).get();
 		
+	} catch (IllegalArgumentException e) {
+		assertTrue(true);
+		
+	}
+	assertEquals(a.getId(),null);
 		
 	}
 	
 	@Test
 	public void findAllAnimalTest() {
-		
+		assertEquals(animalService.findAll().size(), 3);
 		
 	}
 	

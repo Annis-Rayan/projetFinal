@@ -37,7 +37,7 @@ public class ConnexionBDDcreateTest {
 	
 	@Test
 	public void find() {
-		assert(observationService.findById(100)!=null);
+		assert(observationService.findById(99)!=null);
 		
 		try {
 			observationService.findById(2000);
