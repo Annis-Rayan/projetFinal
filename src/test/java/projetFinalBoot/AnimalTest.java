@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import projetFinalBoot.entity.Animal;
+import projetFinalBoot.entity.Ordre;
 import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.ObservationService;
 
@@ -119,5 +120,41 @@ public class AnimalTest {
 		
 	}
 	
+	@Test
+	public void findByNomContainsTest() {
+		
+		assertEquals("souris", animalService.findByNomContains("sou").get(0).getNomCourant());
+		
+	}
+	
+	@Test
+	public void findByOrdreTest() {
+		Animal a =new Animal();
+		a.setNomCourant("babouin");
+		a.setOrdre(Ordre.Mammifere);
+		animalService.save(a);
+		
+		assertEquals("babouin", animalService.findByOrdre(Ordre.Mammifere).get(0).getNomCourant());
+		
+	}
+	
+	@Test
+	public void findByNomScientifiqueTest() {
+		Animal a =new Animal();
+		a.setNomCourant("babouin");
+		a.setNomScientifique("baba");
+		animalService.save(a);
+		
+		Animal a2 = animalService.findById(99).get();
+		a2.setNomScientifique("babb");
+		try {
+			animalService.update(a2);
+		} catch (Exception e) {
+			
+			assertTrue(false);
+		}
+		
+		assertEquals(2, animalService.findByNomContains("ba").size());
+	}
 	
 }

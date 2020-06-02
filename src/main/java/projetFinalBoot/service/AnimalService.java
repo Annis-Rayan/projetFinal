@@ -3,14 +3,14 @@ package projetFinalBoot.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Observation;
+import projetFinalBoot.entity.Ordre;
 import projetFinalBoot.repository.AnimalRepository;
 import projetFinalBoot.repository.ObservationRepository;
 
@@ -118,5 +118,35 @@ public class AnimalService {
 		ani.setNomCourant(nom);
 		Example<Animal> example = Example.of(ani);
 		return animalRepository.findAll(example);
+	}
+	
+	public List<Animal> findByNomContains(String nom)
+	{
+		Animal animal = new Animal();
+		animal.setNomCourant(nom);
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withIgnoreCase("name")
+				.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+		Example<Animal> example = Example.of(animal, matcher);
+		return animalRepository.findAll(example);
+	}
+	
+	public List<Animal> findByOrdre(Ordre o) {
+		
+		Animal ani = new Animal();
+		ani.setOrdre(o);
+		Example<Animal> example = Example.of(ani);
+		return animalRepository.findAll(example);
+	}
+	
+public List<Animal> findByNomScientifique(String nom) {
+		
+	Animal animal = new Animal();
+	animal.setNomScientifique(nom);
+	ExampleMatcher matcher = ExampleMatcher.matching()
+			.withIgnoreCase("name")
+			.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+	Example<Animal> example = Example.of(animal, matcher);
+	return animalRepository.findAll(example);	
 	}
 }

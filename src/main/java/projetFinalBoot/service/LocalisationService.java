@@ -18,7 +18,7 @@ import projetFinalBoot.repository.ObservationRepository;
 public class LocalisationService {
 	
 	@Autowired
-	private LocalisationRepository locrep;
+	private LocalisationRepository localisationRepository;
 	
 	@Autowired
 	private ObservationRepository observationRepository;
@@ -27,11 +27,11 @@ public class LocalisationService {
 		if (localisation.getLocalite().isEmpty()) {
 			localisation.setLocalite("non defini");
 		}
-		locrep.save(localisation);
+		localisationRepository.save(localisation);
 	}
 	
 	public Localisation update(Localisation localisation) throws Exception {
-		Optional<Localisation> opt = locrep.findById(localisation.getID());
+		Optional<Localisation> opt = localisationRepository.findById(localisation.getID());
 		if (opt.isPresent()) {
 			Localisation locenbase = opt.get();
 			if (localisation.getPays() != null) {
@@ -43,7 +43,7 @@ public class LocalisationService {
 			
 			
 			locenbase.setLocalite(localisation.getLocalite());
-			locrep.save(locenbase);
+			localisationRepository.save(locenbase);
 			return locenbase;
 		} else {
 			throw new Exception();
@@ -53,14 +53,14 @@ public class LocalisationService {
 	}
 	
 	public Optional<Localisation> findById(Integer id) {
-		return locrep.findById(id);
+		return localisationRepository.findById(id);
 
 	}
 	
 	public boolean delete(Integer id){
-		Optional<Localisation> opt = locrep.findById(id);
+		Optional<Localisation> opt = localisationRepository.findById(id);
 		if (opt.isPresent()) {
-			locrep.deleteById(id);
+			localisationRepository.deleteById(id);
 			return true;
 		}
 		
@@ -73,19 +73,19 @@ public class LocalisationService {
 		loc.setLocalite(localite);
 		loc.setRegion(region);
 		
-		return locrep.findAll(Example.of(loc));
+		return localisationRepository.findAll(Example.of(loc));
 	}
 	
 	//TODO enlever id=1
 	public List<Localisation> findAll() {
-		return locrep.findAll();
+		return localisationRepository.findAll();
 	}
 
 	
 	
 	public void deleteById(Integer id) {
 		
-		Optional<Localisation> opt = locrep.findById(id);
+		Optional<Localisation> opt = localisationRepository.findById(id);
 		//si il n'y a pas d'id alors erreur
 		if(!opt.isPresent()) {
 			throw new IllegalArgumentException();
@@ -97,13 +97,13 @@ public class LocalisationService {
 		Example<Observation> example= Example.of(obs);
 		List<Observation> listeObservation = observationRepository.findAll(example);
 		
-		Localisation l1 = locrep.findById(1).get();
+		Localisation l1 = localisationRepository.findById(1).get();
 		 for (Observation observation : listeObservation) {
 				observation.setLocalisation(l1);
 				observationRepository.save(observation);
 			}
 		 
-		 locrep.delete(opt.get());
+		 localisationRepository.delete(opt.get());
 		
 	}
 	
