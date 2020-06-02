@@ -48,10 +48,10 @@ public class ConnexionBDDcreateTest {
 	}
 	@Test
 	public void suppressionAnimal() throws Exception {
-		Animal vraiA= animalService.findbyId(100);
-		Animal fauxA= animalService.findbyId(101);
+		Animal vraiA= animalService.findById(100).get();
+		Animal fauxA= animalService.findById(101).get();
 		observationService.suppressionAnimal(vraiA, fauxA);
-		assertFalse(true);
+		//assertFalse(true);
 		
 	}
 	

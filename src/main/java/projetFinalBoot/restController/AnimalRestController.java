@@ -90,7 +90,7 @@ public class AnimalRestController {
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		Optional<Animal> opt = animalService.findById(id);
 		if (opt.isPresent()) {
-			animalService.deletebyId(id);
+			animalService.deleteById(id);
 			
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {

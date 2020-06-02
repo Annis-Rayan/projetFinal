@@ -67,11 +67,11 @@ public class AnimalService {
 		}
 	}
 	
-	public Animal findbyId (Integer id)  {
+	public Optional<Animal> findById (Integer id)  {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
-			return opt.get();
+			return opt;
 		
 			} 
 		else {
@@ -80,7 +80,7 @@ public class AnimalService {
 				
 	} 
 	
-	public boolean deletebyId(Integer id) {
+	public boolean deleteById(Integer id) {
 		
 		Optional<Animal> opt = animalRepository.findById(id);
 		if (opt.isPresent()) {
@@ -94,18 +94,8 @@ public class AnimalService {
 	public List<Animal> findAll() {
 		return animalRepository.findAll();
 	}
-	
-	
 
-	public Optional<Animal> findById(Integer id) {
-		Optional<Animal> opt = animalRepository.findById(id);
-		if (opt.isPresent()) {
-			return opt;
-		}
-		else {
-			throw new IllegalArgumentException();
-		}		
-	}
+	
 
 	public List<Animal> findByNom(String nom) {
 		

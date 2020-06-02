@@ -114,7 +114,7 @@ public class ObservationService {
 		}
 		
 		//supprime l'animal en doublon
-		as.deletebyId(doublon.getId());
+		as.deleteById(doublon.getId());
 	}
 	
 	//TODO
