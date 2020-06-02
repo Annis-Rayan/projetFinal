@@ -44,7 +44,7 @@ public class ObservationRestController {
 		List<Observation> list = observationService.findAll();
 		return new ResponseEntity<List<Observation>>(list, HttpStatus.OK);
 	}
-	
+
 	@JsonView(Views.Common.class)
 	@GetMapping("/{dateObservation}")
 	public ResponseEntity<List<Observation>> FindByDate(@PathVariable("dateObservation") Date dateObservation) {

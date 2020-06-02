@@ -48,15 +48,15 @@ public class Observation {
 	@JsonView(Views.Common.class)
 	@Column(name="description",nullable=false)
 	private String description;
-	@JsonView(Views.ObservationWithLocalisation.class)
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "localisation", foreignKey = @ForeignKey(name = "localisation_fk"))
 	private Localisation localisation;
-	@JsonView(Views.ObservationWithUtilisateur.class)
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "utilisateur", foreignKey = @ForeignKey(name = "utilisateur_fk"))
 	private Utilisateur utilisateur;
-	@JsonView(Views.ObservationWithAnimal.class)
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
