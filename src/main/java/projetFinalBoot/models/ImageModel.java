@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import projetFinalBoot.entity.Utilisateur;
 
 import javax.persistence.*;
 
@@ -28,6 +29,9 @@ public class ImageModel {
     @Lob
     @Column(name = "pic")
     private byte[] pic;
+    
+    @OneToOne
+    private Utilisateur utilisateur;
 
 //Custom Construtor
     public ImageModel(String name, String type, byte[] pic) {

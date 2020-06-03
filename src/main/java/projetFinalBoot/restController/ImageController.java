@@ -30,7 +30,7 @@ public class ImageController {
     @Autowired
     UtilisateurService utilisateurService;
 
-    @PostMapping("users/{id}/upload")
+    @PostMapping("users/edit/upload/{id}")
     public ResponseEntity<ImageModel> uplaodImageUser(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
 
     	Utilisateur user = utilisateurService.findById(id).get();
