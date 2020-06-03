@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Observation;
+import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.LocalisationRepository;
 import projetFinalBoot.repository.ObservationRepository;
+import projetFinalBoot.repository.UtilisateurRepository;
 
 @Service
 public class ObservationService {
@@ -23,6 +25,9 @@ public class ObservationService {
 	
 	@Autowired
 	private LocalisationRepository localisationRepository;
+	
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
 	
 	@Autowired
 	AnimalService as;
@@ -77,13 +82,27 @@ public class ObservationService {
 		
 	}
 	
-	public List<Observation> FindByDate(Date dateObservation) {
-		Observation obs = new Observation();
-		obs.setDateObservation(dateObservation);
-		Example<Observation> example = Example.of(obs);
+	public List<Observation> findByAnimal(String nom) {
+		Animal animal = as.findByNom(nom).get(0);
+		
+		Observation obs=new Observation();
+		obs.setAnimal(animal);
+		Example<Observation> example= Example.of(obs);
 		return observationRepository.findAll(example);
 		
 	}
+	
+	public List<Observation> findByUser(String nom) {
+		Utilisateur user = utilisateurRepository.findByPseudo(nom).get();
+		
+		Observation obs=new Observation();
+		obs.setUtilisateur(user);;
+		Example<Observation> example= Example.of(obs);
+	    return observationRepository.findAll(example);
+		
+	}
+	
+	
 	
 	
 	public boolean delete(Integer id){
@@ -171,4 +190,8 @@ public void deleteById(Integer id) {
 	observationRepository.delete(observationRepository.getOne(id));
 	
 }
+
+
+
+
 }
