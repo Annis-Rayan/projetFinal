@@ -63,7 +63,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// @formatter:off
-		auth.inMemoryAuthentication()
+	/*	auth.inMemoryAuthentication()
 			.withUser("annis").password("annis").roles("ADMIN")
 			.and()
 			.withUser("user").password("user").roles("USER");
@@ -72,7 +72,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.passwordEncoder(passwordEncoder())
 			.usersByUsernameQuery("select username,password,enable from login where username=?")
 			.authoritiesByUsernameQuery("select username,role from login_role where username=?");
-		
+		*/
 		auth.userDetailsService(authService);
 		
 		// @formatter:on
