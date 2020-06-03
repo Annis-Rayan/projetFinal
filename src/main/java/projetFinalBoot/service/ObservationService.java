@@ -43,6 +43,11 @@ public class ObservationService {
 		if (observation.getDescription().isEmpty()) {
 			observation.setDescription("non defini");
 		}
+		
+		if(observation.getLocalisation().getId()==null) {
+			localisationRepository.save(observation.getLocalisation());
+		}
+		
 		observationRepository.save(observation);
 		return true;
 	}
