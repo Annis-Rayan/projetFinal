@@ -30,7 +30,7 @@ public class ImageModel {
     @Column(name = "pic")
     private byte[] pic;
     
-    @OneToOne
+    @OneToOne(mappedBy = "imageProfil",fetch = FetchType.LAZY)
     private Utilisateur utilisateur;
 
 //Custom Construtor

@@ -3,7 +3,7 @@ INSERT INTO public.localisation(
 	VALUES (1, 'nd', 'nd', 'nd');
 
 INSERT INTO public.utilisateur(
-	id_utilisateur, photo_profil, nom, prenom, pseudo, type, version)
+	id_utilisateur, image_profil_id, nom, prenom, pseudo, type, version)
 	VALUES (1, null, 'nd', 'nd', 'compte fermé', 'USER', 1);
 
 INSERT INTO public.localisation(
@@ -11,7 +11,7 @@ INSERT INTO public.localisation(
 	VALUES (99, 'france', 'normandie', 'petaouch');
 
 INSERT INTO public.utilisateur(
-	id_utilisateur, photo_profil, nom, prenom, pseudo, type, version)
+	id_utilisateur, image_profil_id, nom, prenom, pseudo, type, version)
 	VALUES (99, null, null, null, 'annis', 'ADMIN', 1);
 	
 INSERT INTO public.animal(

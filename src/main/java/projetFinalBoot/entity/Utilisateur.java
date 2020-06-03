@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +52,7 @@ public class Utilisateur {
 	
 	@JsonView(Views.Common.class)
 	@Lob
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	//@Column(name = "photo_profil", length = 5000)
 	private ImageModel imageProfil;
 	
