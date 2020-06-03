@@ -55,16 +55,16 @@ public class ObservationRestController {
 //	public ResponseEntity<List<Observation>> FindByDate(@PathVariable("dateObservation") Date dateObservation) {
 //		List<Observation> listObs = observationService.FindByDate(dateObservation);
 //			return new ResponseEntity<List<Observation>>(listObs, HttpStatus.OK);
-		
+//		
 //	}
-
+//
 //	@JsonView(Views.ObservationWithAnimal.class)
 //	@GetMapping("/animal")
 //	public ResponseEntity<List<Observation>> findAllWithAnimal() {
 //		List<Observation> list = observationService.findAll();
 //		return new ResponseEntity<List<Observation>>(list, HttpStatus.OK);
 //	}
-	
+//	
 //	@JsonView(Views.ObservationWithLocalisation.class)
 //	@GetMapping("/localisation")
 //	public ResponseEntity<List<Observation>> findAllWithLocalisation() {
@@ -78,18 +78,18 @@ public class ObservationRestController {
 //		List<Observation> list = observationService.findAll();
 //		return new ResponseEntity<List<Observation>>(list, HttpStatus.OK);
 //	}
-	
-	
+//	
+//	
 //	@JsonView(Views.ObservationWithSignalementObservation.class)
-	//PAS SUR DE l'URL ANGULAR
+//	//PAS SUR DE l'URL ANGULAR
 //	@GetMapping("/signalementObservation")
 //	public ResponseEntity<List<Observation>> findAllWithSignalementObservation() {
 //		List<Observation> list = observationService.findAll();
 //		return new ResponseEntity<List<Observation>>(list, HttpStatus.OK);
 //	}
-	
-	
-	
+//	
+//	
+//	
 	
 
 	@PostMapping({ "", "/" })
