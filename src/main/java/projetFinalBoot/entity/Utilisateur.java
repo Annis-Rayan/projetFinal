@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -54,6 +55,7 @@ public class Utilisateur {
 	@Lob
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	//@Column(name = "photo_profil", length = 5000)
+	@JoinColumn(name = "utilisateur", nullable = false)
 	private ImageModel imageProfil;
 	
 	@JsonView(Views.Common.class)
