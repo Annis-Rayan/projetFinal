@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -51,8 +52,9 @@ public class Utilisateur {
 	private String pseudo;
 	
 	@JsonView(Views.Common.class)
-	@Column(name = "photo_profil", length = 50)
-	private Blob imageProfil;
+	@Lob
+	@Column(name = "photo_profil", length = 5000)
+	private Byte[] imageProfil;
 	
 	@JsonView(Views.Common.class)
 	@Column(name = "type", length = 5, nullable = false)
@@ -116,16 +118,17 @@ public class Utilisateur {
 
 
 
-	public Blob getImageProfil() {
+	
+
+
+	public Byte[] getImageProfil() {
 		return imageProfil;
 	}
 
 
-
-	public void setImageProfil(Blob imageProfil) {
+	public void setImageProfil(Byte[] imageProfil) {
 		this.imageProfil = imageProfil;
 	}
-
 
 
 	public TypeUtilisateur getType() {
