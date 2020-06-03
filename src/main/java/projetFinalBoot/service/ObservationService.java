@@ -74,6 +74,14 @@ public class ObservationService {
 			if (observation.getAnimal() != null) {
 				observationEnBase.setAnimal(observation.getAnimal());
 			}
+			
+			if(observation.getLocalisation().getId()==null) {
+				localisationRepository.save(observation.getLocalisation());
+			}
+			
+			observationRepository.save(observation);
+			
+			
 			observationRepository.save(observationEnBase);
 			return true;
 			
