@@ -154,7 +154,7 @@ public class AnimalTest {
 			assertTrue(false);
 		}
 		
-		assertEquals(2, animalService.findByNomContains("ba").size());
+		assertEquals(2, animalService.findByNomScientifique("ba").size());
 	}
 	
 }
