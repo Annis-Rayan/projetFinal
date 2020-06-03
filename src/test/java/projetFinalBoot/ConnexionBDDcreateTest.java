@@ -1,19 +1,20 @@
 package projetFinalBoot;
 
-import java.text.ParseException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import projetFinalBoot.entity.Animal;
-import projetFinalBoot.service.AnimalService;
-import projetFinalBoot.service.LocalisationService;
-import projetFinalBoot.service.ObservationService;
+
+
+import projetFinalBoot.entity.Utilisateur;
+import projetFinalBoot.models.ImageModel;
+import projetFinalBoot.repository.ImageRepository;
+
 import projetFinalBoot.service.UtilisateurService;
 
 
@@ -22,32 +23,27 @@ import projetFinalBoot.service.UtilisateurService;
 public class ConnexionBDDcreateTest {
 	
 	@Autowired
-	private ObservationService observationService;
-	@Autowired
-	private LocalisationService localisationService;
+	private ImageRepository imageRepository;
 	@Autowired
 	private UtilisateurService utilisateurService;
-	@Autowired
-	private AnimalService animalService;
 	
-	@BeforeAll
-	public static void initSpring() throws ParseException
-	{	
-	}
 	
 	@Test
-	public void find() {
-		assert(observationService.findById(99)!=null);
+	public void find() throws IOException {
 		
-		try {
-			observationService.findById(2000);
-		} catch (IllegalArgumentException e) {
-			assert(true);
-			
+		File file = new File("C:\\Users\\Amendil\\Pictures\\coul.png");
+		
+		
+		Utilisateur user = utilisateurService.findById(1).get();
+		ImageModel img = new ImageModel(file.getName(),"image/jpeg",Files.readAllBytes(file.toPath()));
+		if (user.getImageProfil()!=null) {
+			imageRepository.deleteById(user.getImageProfil().getId());
 		}
+		user.setImageProfil(img);
+        
+        final ImageModel savedImage = imageRepository.save(img);
+        utilisateurService.save(user);
 	}
-	
-	
 	
 	
 }

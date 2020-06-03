@@ -37,6 +37,10 @@ public class ImageModel {
         this.pic = pic;
     }
 
+	public ImageModel() {
+	super();
+	}
+
 	public Long getId() {
 		return id;
 	}
