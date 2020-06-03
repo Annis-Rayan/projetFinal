@@ -7,8 +7,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Localisation;
@@ -143,5 +145,27 @@ public class LocalisationService {
 		loc.setLocalite(localite);
 		Example<Localisation> example = Example.of(loc);
 		return localisationRepository.findAll(example);
+	}
+	
+	public List<Localisation> findByRegionContains(String nom)
+	{
+		Localisation localisation = new Localisation();
+		localisation.setRegion(nom);
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withIgnoreCase("name")
+				.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+		Example<Localisation> example = Example.of(localisation, matcher);
+		return localisationRepository.findAll(example);	
+	}
+	
+	public List<Localisation> findByLocaliteeContains(String nom)
+	{
+		Localisation localisation = new Localisation();
+		localisation.setLocalite(nom);
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withIgnoreCase("name")
+				.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+		Example<Localisation> example = Example.of(localisation, matcher);
+		return localisationRepository.findAll(example);	
 	}
 }
