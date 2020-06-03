@@ -29,9 +29,6 @@ public class ImageModel {
     @Lob
     @Column(name = "pic")
     private byte[] pic;
-    
-    @OneToOne(mappedBy = "imageProfil",fetch = FetchType.LAZY)
-    private Utilisateur utilisateur;
 
 //Custom Construtor
     public ImageModel(String name, String type, byte[] pic) {

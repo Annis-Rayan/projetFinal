@@ -52,10 +52,7 @@ public class Utilisateur {
 	private String pseudo;
 	
 	@JsonView(Views.Common.class)
-	@Lob
-	@OneToOne(fetch = FetchType.LAZY, optional = true)
-	//@Column(name = "photo_profil", length = 5000)
-	@JoinColumn(name = "utilisateur", nullable = false)
+	@OneToOne
 	private ImageModel imageProfil;
 	
 	@JsonView(Views.Common.class)
