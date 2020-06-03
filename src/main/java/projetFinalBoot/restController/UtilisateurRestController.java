@@ -40,14 +40,14 @@ public class UtilisateurRestController {
 	@JsonView(Views.Common.class)
 	@GetMapping({ "", "/" })
 	public ResponseEntity<List<Utilisateur>> findAll() {
-		List<Utilisateur> list = utilisateurService.rechercheAll();  // TO DO: method
+		List<Utilisateur> list = utilisateurService.findAll();  // TO DO: method
 		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
 	}
 	
 	@JsonView(Views.Common.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Utilisateur> findById(@PathVariable("id") Integer id) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); // Error to check with Raph
+		Optional<Utilisateur> opt = utilisateurService.findById(id); // Error to check with Raph
 		if (opt.isPresent()) {
 			return new ResponseEntity<Utilisateur>(opt.get(), HttpStatus.OK);
 		} else {
@@ -60,7 +60,7 @@ public class UtilisateurRestController {
 	@JsonView(Views.UtilisateurWithObservation.class)
 	@GetMapping("/observation")
 	public ResponseEntity<List<Utilisateur>> findAllWithObservation() {
-		List<Utilisateur> list = utilisateurService.rechercheAll(); // TO DO
+		List<Utilisateur> list = utilisateurService.findAll(); // TO DO
 		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
 	}
 	
@@ -71,7 +71,7 @@ public class UtilisateurRestController {
 	@GetMapping("/nom/{pseudo}")
 	public ResponseEntity<Boolean> findByPseudo(@PathVariable("pseudo") String pseudo) {
 		try {
-			Optional<Utilisateur> opt = utilisateurService.rechercheByPseudo(pseudo); // Error to check with Raph
+			Optional<Utilisateur> opt = utilisateurService.findByPseudo(pseudo); // Error to check with Raph
 			
 			return new ResponseEntity<>(false, HttpStatus.OK);
 			
@@ -87,7 +87,7 @@ public class UtilisateurRestController {
 	@JsonView(Views.UtilisateurWithObservation.class)
 	@GetMapping("/{id}/observation")
 	public ResponseEntity<Utilisateur> findByIdWithObservation(@PathVariable("id") Integer id) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); 
+		Optional<Utilisateur> opt = utilisateurService.findById(id); 
 		if (opt.isPresent()) {
 			return new ResponseEntity<Utilisateur>(opt.get(), HttpStatus.OK);
 		} else {
@@ -100,7 +100,7 @@ public class UtilisateurRestController {
 	@JsonView(Views.UtilisateurWithObservation.class)
 	@GetMapping("/{pseudo}/observation")
 	public ResponseEntity<Utilisateur> findByPseudoWithObservation(@PathVariable("pseudo") String pseudo) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheByPseudo(pseudo); //error to check with Raph
+		Optional<Utilisateur> opt = utilisateurService.findByPseudo(pseudo); //error to check with Raph
 		if (opt.isPresent()) {
 			return new ResponseEntity<Utilisateur>(opt.get(), HttpStatus.OK);
 		} else {
@@ -126,7 +126,7 @@ public class UtilisateurRestController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
-		Optional<Utilisateur> opt = utilisateurService.rechercheById(id); 
+		Optional<Utilisateur> opt = utilisateurService.findById(id); 
 		if (opt.isPresent()) {
 			utilisateurService.deleteById(id);
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -142,7 +142,7 @@ public class UtilisateurRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Utilisateur> opt = utilisateurService.rechercheById(id);
+		Optional<Utilisateur> opt = utilisateurService.findById(id);
 		if (opt.isPresent()) {
 			Utilisateur utilisateurEnBase = opt.get();
 			utilisateurEnBase.setPseudo(utilisateur.getPseudo());

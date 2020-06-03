@@ -1,19 +1,15 @@
 package projetFinalBoot.entity;
 
-import java.sql.Blob;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -23,6 +19,7 @@ import javax.persistence.Version;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projetFinalBoot.entity.views.Views;
+import projetFinalBoot.models.ImageModel;
 
 
 
@@ -54,7 +51,7 @@ public class Utilisateur {
 	@JsonView(Views.Common.class)
 	@Lob
 	@Column(name = "photo_profil", length = 5000)
-	private Byte[] imageProfil;
+	private ImageModel imageProfil;
 	
 	@JsonView(Views.Common.class)
 	@Column(name = "type", length = 5, nullable = false)
@@ -121,12 +118,12 @@ public class Utilisateur {
 	
 
 
-	public Byte[] getImageProfil() {
+	public ImageModel getImageProfil() {
 		return imageProfil;
 	}
 
 
-	public void setImageProfil(Byte[] imageProfil) {
+	public void setImageProfil(ImageModel imageProfil) {
 		this.imageProfil = imageProfil;
 	}
 

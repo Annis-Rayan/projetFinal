@@ -24,16 +24,7 @@ public class UtilisateurService {
 	private ObservationRepository observationRepository;
 	
 	
-	public void ajout(Utilisateur utilisateur) {
-		if(utilisateur.getPseudo().isEmpty()) {
-			utilisateur.setPseudo("Pseudo non defini");
-		}
-		
-		utilisateurRepository.save(utilisateur);
-	}
-	
-	
-	public Optional<Utilisateur> rechercheById(Integer id) {
+	public Optional<Utilisateur> findById(Integer id) {
 		Optional<Utilisateur> opt = utilisateurRepository.findById(id);
 		if(opt.isPresent()) {
 			return opt;
@@ -41,7 +32,7 @@ public class UtilisateurService {
 		throw new IllegalArgumentException();
 	}
 	
-	public Optional<Utilisateur> rechercheByPseudo(String pseudo) {
+	public Optional<Utilisateur> findByPseudo(String pseudo) {
 		Optional<Utilisateur> opt = utilisateurRepository.findByPseudo(pseudo);
 		if(opt.isPresent()) {
 			return opt;
@@ -49,7 +40,7 @@ public class UtilisateurService {
 		throw new IllegalArgumentException();
 	}
 	
-	public Utilisateur rechercheByPseudoWithObservations(String pseudo) {
+	public Utilisateur findByPseudoWithObservations(String pseudo) {
 		Optional<Utilisateur> opt = utilisateurRepository.findByPseudoWithObservations(pseudo);
 		if(opt.isPresent()) {
 			return opt.get();
@@ -57,7 +48,7 @@ public class UtilisateurService {
 		throw new IllegalArgumentException();
 	}
 	
-	public Utilisateur rechercheByIdWithObservations(Integer id) {
+	public Utilisateur findByIdWithObservations(Integer id) {
 		Optional<Utilisateur> opt = utilisateurRepository.findByIdWithObservations(id);
 		if(opt.isPresent()) {
 			return opt.get();
@@ -65,9 +56,13 @@ public class UtilisateurService {
 		throw new IllegalArgumentException();
 	}
 
-	//TODO enlever id=1
-	public List<Utilisateur> rechercheAll() {
-		return utilisateurRepository.findAll();
+	public List<Utilisateur> findAll() {
+		
+		List<Utilisateur> l =utilisateurRepository.findAll();
+		Utilisateur u =utilisateurRepository.findById(1).get();
+		l.remove(u);
+		
+		return l;
 	}
 
 	public void save(@Valid Utilisateur utilisateur) {
