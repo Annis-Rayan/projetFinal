@@ -32,20 +32,31 @@ public class ImageController {
 
     @PostMapping("users/edit/upload/{id}")
     public ResponseEntity<ImageModel> uplaodImageUser(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
-
+    	
+    	
+    	System.out.println("------------------------------------------------");
     	Utilisateur user = utilisateurService.findById(id).get();
     	
         ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
         
         if (user.getImageProfil()!=null) {
+        	System.out.println("image existante");
 			imageRepository.deleteById(user.getImageProfil().getId());
 		}
         
         user.setImageProfil(img);
-        
+       
         final ImageModel savedImage = imageRepository.save(img);
+        
+        
+        
+        System.out.println("id image : "+user.getImageProfil().getId());
+        System.out.println("pseudo : "+user.getPseudo());
+        
+        
         utilisateurService.save(user);
-
+        
+        System.out.println("------------------------------------------------");
         return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
     }
     //{"","observation/{id}/upload",

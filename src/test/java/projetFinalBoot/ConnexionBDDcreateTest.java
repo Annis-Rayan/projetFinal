@@ -31,7 +31,7 @@ public class ConnexionBDDcreateTest {
 	@Test
 	public void find() throws IOException {
 		
-		File file = new File("C:\\Users\\Amendil\\Pictures\\coul.png");
+		File file = new File("C:\\Users\\utilisateur\\Desktop\\Angular Projects\\projetFinalAngular\\src\\assets\\images\\2.jpg");
 		
 		
 		Utilisateur user = utilisateurService.findById(1).get();
