@@ -39,7 +39,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.csrf().disable()
 			.authorizeRequests().antMatchers("/rest/inscription","/rest/inscription/**").permitAll()
 			.and()
-			.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic()
+			.authorizeRequests().antMatchers("/rest/**").permitAll()//authenticated().and().httpBasic()
 
 			.and()
 			.authorizeRequests().anyRequest().permitAll(); //
