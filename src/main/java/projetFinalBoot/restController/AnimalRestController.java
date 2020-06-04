@@ -54,6 +54,13 @@ public class AnimalRestController {
 		List<Animal> list = animalService.findAll();
 		return new ResponseEntity<List<Animal>>(list, HttpStatus.OK);
 	}
+	
+	@JsonView(Views.Common.class)
+	@GetMapping({"/{nomCourant}/nomCourant" })
+	public ResponseEntity<List<Animal>> findByNomContains(@PathVariable("nomCourant") String nomCourant) {
+		List<Animal> list = animalService.findByNomContains(nomCourant);
+		return new ResponseEntity<List<Animal>>(list, HttpStatus.OK);
+	}
 
 	@PostMapping({ "", "/" })
 	public ResponseEntity<Void> addAnimal(@Valid @RequestBody Animal animal, BindingResult br,
