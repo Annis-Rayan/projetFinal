@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.zaxxer.hikari.util.SuspendResumeLock;
+
 import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.ObservationRepository;
@@ -33,11 +35,16 @@ public class UtilisateurService {
 	
 	public Optional<Utilisateur> findByPseudo(String pseudo) {
 		
+		System.out.println("******************************************************");
 		Utilisateur u = new Utilisateur();
 		u.setPseudo(pseudo);
 		Example<Utilisateur> example = Example.of(u);
 		
 		Optional<Utilisateur> opt = utilisateurRepository.findOne(example);
+		
+		System.out.println("pseudo : "+ pseudo);
+		
+		System.out.println("******************************************************");
 		if(opt.isPresent()) {
 			return opt;
 		}
