@@ -60,19 +60,6 @@ public class Utilisateur {
 	@Enumerated(EnumType.STRING)
 	private TypeUtilisateur type;
 	
-	@JsonView(Views.UtilisateurWithObservation.class)
-	@OneToMany(mappedBy = "utilisateur")
-	//@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "observation_fk"))
-	private Set<Observation> observations = new HashSet<>();
-	
-	@JsonView(Views.UtilisateurWithSignalement.class)
-	@OneToMany(mappedBy = "auteur")
-	private Set<Signalement> signalement = new HashSet<>();
-	
-	@JsonView(Views.UtilisateurWithSignalementUtilisateur.class)
-	@OneToMany(mappedBy = "cible")
-	private Set<SignalementUtilisateur> signalementUtilisateur = new HashSet<>();
-
 
 	@Version
 	private int version;
@@ -165,18 +152,6 @@ public class Utilisateur {
 	}
 
 
-	
-	public Set<Observation> getObservations() {
-		return observations;
-	}
-
-	
-
-	public void setObservations(Set<Observation> observations) {
-		this.observations = observations;
-	}
-
-	
 
 	@Override
 	public int hashCode() {

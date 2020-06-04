@@ -38,28 +38,35 @@ public class Observation {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqObservation")
 	@Column(name="id_observation")
 	private Integer id;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="date_observation",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dateObservation;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="nombre",nullable=false)
 	private Integer nombre;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="description",nullable=false)
 	private String description;
+	
 	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "localisation", foreignKey = @ForeignKey(name = "localisation_fk"))
 	private Localisation localisation;
+	
 	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "utilisateur", foreignKey = @ForeignKey(name = "utilisateur_fk"))
 	private Utilisateur utilisateur;
+	
 	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
+	
 	@JsonView(Views.ObservationWithSignalementObservation.class)
 	@OneToMany(mappedBy="observation")
 	private Set<SignalementObservation> signalementObservation = new HashSet<>();

@@ -16,5 +16,6 @@ public class LoginRestController {
 	public ResponseEntity<Void> login() {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+	
+	
 }
