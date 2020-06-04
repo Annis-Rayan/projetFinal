@@ -18,7 +18,7 @@ import projetFinalBoot.entity.views.Views;
 public class Login {
 	@JsonView(Views.Common.class)
 	@Id
-	@Column(name = "username", length = 100)
+	@Column(name = "username", length = 100, nullable = false)
 	private String login;
 	
 	@Column(name = "password", length = 100, nullable = false)
@@ -31,6 +31,7 @@ public class Login {
 	private Set<LoginRole> roles;
 	
 	@JsonView(Views.Common.class)
+	
 	@OneToOne
 	private Utilisateur utilisateur;
 	
@@ -38,6 +39,17 @@ public class Login {
 	public Login() {
 
 	}
+	
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
 
 	public String getLogin() {
 		return login;
