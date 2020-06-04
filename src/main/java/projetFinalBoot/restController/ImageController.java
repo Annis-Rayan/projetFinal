@@ -22,7 +22,7 @@ import projetFinalBoot.service.UtilisateurService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/rest/")
+@RequestMapping(path = "/rest")
 public class ImageController {
 	
 
@@ -35,30 +35,25 @@ public class ImageController {
     @PostMapping("users/edit/upload/{id}")
     public ResponseEntity<ImageModel> uplaodImageUser(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
     	
-    	
-    	System.out.println("------------------------------------------------");
     	Utilisateur user = utilisateurService.findById(id).get();
     	
         ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
         
         if (user.getImageProfil()!=null) {
-        	System.out.println("image existante");
-			imageRepository.deleteById(user.getImageProfil().getId());
+        	ImageModel img2=user.getImageProfil();
+        	user.setImageProfil(null);
+        	utilisateurService.save(user);
+			imageRepository.deleteById(img2.getId());
 		}
         
-        user.setImageProfil(img);
+        
        
         final ImageModel savedImage = imageRepository.save(img);
         
-        
-        
-        System.out.println("id image : "+user.getImageProfil().getId());
-        System.out.println("pseudo : "+user.getPseudo());
-        
+        user.setImageProfil(savedImage); 
         
         utilisateurService.save(user);
-        
-        System.out.println("------------------------------------------------");
+
         return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
     }
 

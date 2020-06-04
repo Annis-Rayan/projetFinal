@@ -54,18 +54,24 @@ public class ConnexionBDDcreateTest {
 	@Test
 	public void find() throws IOException {
 		
-		File file = new File("C:\\Users\\Amendil\\Pictures\\ad.PNG");
+		File file = new File("C:\\Users\\utilisateur\\Desktop\\Images projet sopra1\\bird1.jpg");
 		
 		
 		Utilisateur user = utilisateurService.findById(1).get();
 		ImageModel img = new ImageModel(file.getName(),"image/jpeg",Files.readAllBytes(file.toPath()));
 		if (user.getImageProfil()!=null) {
-			imageRepository.deleteById(user.getImageProfil().getId());
+        	ImageModel img2=user.getImageProfil();
+        	user.setImageProfil(null);
+        	utilisateurService.save(user);
+			imageRepository.deleteById(img2.getId());
 		}
 		user.setImageProfil(img);
         
         imageRepository.save(img);
         utilisateurService.save(user);
+        
+        user = utilisateurService.findById(1).get();
+        assertNotNull(user.getImageProfil());
 	}
 	
 	
