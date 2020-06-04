@@ -75,6 +75,11 @@ public class Login {
 		this.enable = enable;
 	}
 
+	
+	public Set<LoginRole> getRoless() {
+		return roles;
+	}
+	
 	public LoginRole getRoles() {
 		return (LoginRole)roles.toArray()[0];
 	}

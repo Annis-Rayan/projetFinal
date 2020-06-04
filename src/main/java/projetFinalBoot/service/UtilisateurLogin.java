@@ -25,7 +25,7 @@ public class UtilisateurLogin implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-		for (LoginRole loginRole : login.getRoles()) {
+		for (LoginRole loginRole : login.getRoless()) {
 			authorities.add(new SimpleGrantedAuthority(loginRole.getRole().toString()));
 		}
 		return authorities;
