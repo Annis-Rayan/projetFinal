@@ -1,19 +1,13 @@
 package projetFinalBoot.entity;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -60,19 +54,6 @@ public class Utilisateur {
 	@Enumerated(EnumType.STRING)
 	private TypeUtilisateur type;
 	
-	@JsonView(Views.UtilisateurWithObservation.class)
-	@OneToMany(mappedBy = "utilisateur")
-	//@JoinColumn(name = "observation", foreignKey = @ForeignKey(name = "observation_fk"))
-	private Set<Observation> observations = new HashSet<>();
-	
-	@JsonView(Views.UtilisateurWithSignalement.class)
-	@OneToMany(mappedBy = "auteur")
-	private Set<Signalement> signalement = new HashSet<>();
-	
-	@JsonView(Views.UtilisateurWithSignalementUtilisateur.class)
-	@OneToMany(mappedBy = "cible")
-	private Set<SignalementUtilisateur> signalementUtilisateur = new HashSet<>();
-
 
 	@Version
 	private int version;
@@ -165,18 +146,6 @@ public class Utilisateur {
 	}
 
 
-	
-	public Set<Observation> getObservations() {
-		return observations;
-	}
-
-	
-
-	public void setObservations(Set<Observation> observations) {
-		this.observations = observations;
-	}
-
-	
 
 	@Override
 	public int hashCode() {

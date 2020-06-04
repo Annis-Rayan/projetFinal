@@ -1,10 +1,8 @@
 package projetFinalBoot.service;
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -16,7 +14,6 @@ import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.LocalisationRepository;
 import projetFinalBoot.repository.ObservationRepository;
-import projetFinalBoot.repository.UtilisateurRepository;
 
 @Service
 public class ObservationService {
@@ -27,7 +24,7 @@ public class ObservationService {
 	private LocalisationRepository localisationRepository;
 	
 	@Autowired
-	private UtilisateurRepository utilisateurRepository;
+	private UtilisateurService utilisateurservice;
 	
 	@Autowired
 	AnimalService as;
@@ -106,7 +103,10 @@ public class ObservationService {
 	}
 	
 	public List<Observation> findByUser(String nom) {
-		Utilisateur user = utilisateurRepository.findByPseudo(nom).get();
+		
+		
+		
+		Utilisateur user = utilisateurservice.findByPseudo(nom).get();
 		
 		Observation obs=new Observation();
 		obs.setUtilisateur(user);;

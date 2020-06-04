@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.views.Views;
 import projetFinalBoot.service.AnimalService;
+import projetFinalBoot.service.ObservationService;
 
 @RestController
 @RequestMapping("/rest/animal")
@@ -35,6 +36,9 @@ public class AnimalRestController {
 	
 	@Autowired
 	AnimalService animalService;
+	
+	@Autowired
+	ObservationService observationService;
 	
 	@JsonView(Views.Common.class)
 	@GetMapping({ "", "/" })
@@ -111,5 +115,22 @@ public class AnimalRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		 
 	}		
-
+	
+	@PutMapping("doublon/{id1}/{id2}")
+	public ResponseEntity<Void> update(@PathVariable("id1") Integer idv,@PathVariable("id2") Integer idd, BindingResult br) throws Exception {
+		
+		if (br.hasErrors())
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
+		Optional<Animal> optv=animalService.findById(idv);
+		Optional<Animal> optd=animalService.findById(idd);
+		
+		if (!optv.isPresent()||!!optd.isPresent() ) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		observationService.deleteAnimalDoublon(optv.get(), optd.get());
+		return new ResponseEntity<>(HttpStatus.OK);
+		 
+	}		
 }
