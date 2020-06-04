@@ -67,6 +67,7 @@ public class AnimalRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
+		animal.setEmplacementImage(null);
 		animalService.save(animal);
 
 		URI uri = uCB.path("/rest/animal/{id}").buildAndExpand(animal.getId()).toUri();
