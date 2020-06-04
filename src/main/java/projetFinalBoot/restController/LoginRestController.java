@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +32,8 @@ public class LoginRestController {
 	@Autowired
 	private LoginRepository loginRepository;
 	
-	@GetMapping({ "", "/" })
-	public ResponseEntity<Role> login(@Valid @RequestBody Login login,BindingResult br) {
+	@PostMapping({ "", "/" })
+	public ResponseEntity<Login> login(@Valid @RequestBody Login login,BindingResult br) {
 		
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -42,7 +43,7 @@ public class LoginRestController {
 		
 		if(opt.isPresent() )
 			if( passwordEncoder.matches("annis",opt.get().getPassword()))
-				return new ResponseEntity<Role>(opt.get().getRoles().getRole(),HttpStatus.OK);
+				return new ResponseEntity<Login>(opt.get(),HttpStatus.OK);
 		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}

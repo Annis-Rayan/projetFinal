@@ -101,8 +101,8 @@ public class Login {
 		return roles;
 	}
 	
-	public LoginRole getRoles() {
-		return (LoginRole)roles.toArray()[0];
+	public Set<LoginRole> getRoles() {
+		return roles;
 	}
 
 	public void setRoles(Set<LoginRole> roles) {
