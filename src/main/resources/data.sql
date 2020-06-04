@@ -15,16 +15,16 @@ INSERT INTO public.utilisateur(
 	VALUES (nextval('seq_utilisateur'), null, null, null, 'annis', 'ADMIN', 1);
 
 INSERT INTO public.login(
-	username, enable, password)
-	VALUES ('annis', true, 'annis');
+	id_login, username, enable, password)
+	VALUES (99, 'annis', true, 'annis');
 	
 INSERT INTO public.utilisateur(
 	id_utilisateur, image_profil_id, nom, prenom, pseudo, type, version)
 	VALUES (nextval('seq_utilisateur'), null, null, null, 'mec', 'USER', 1);
 
 INSERT INTO public.login(
-	username, enable, password)
-	VALUES ('mec', true, 'mec');
+	id_login, username, enable, password)
+	VALUES (98,'mec', true, 'mec');
 	
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)

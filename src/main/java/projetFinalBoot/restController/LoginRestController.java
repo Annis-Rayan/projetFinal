@@ -38,15 +38,11 @@ public class LoginRestController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		Login l = new Login();
-		l.setLogin(login.getLogin());
-		l.setPassword(passwordEncoder.encode(login.getPassword()));
-		Example<Login> example = Example.of(l);
-		Optional<Login> opt = loginRepository.findOne(example);
+		Optional<Login> opt = loginRepository.findByName("annis");
 		
-		if(opt.isPresent())
-		
-			return new ResponseEntity<Role>(opt.get().getRoles().getRole(),HttpStatus.OK);
+		if(opt.isPresent() )
+			if( passwordEncoder.matches("annis",opt.get().getPassword()))
+				return new ResponseEntity<Role>(opt.get().getRoles().getRole(),HttpStatus.OK);
 		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}

@@ -13,7 +13,7 @@ INSERT INTO public.localisation(
 INSERT INTO public.utilisateur(
 	id_utilisateur, image_profil_id, nom, prenom, pseudo, type, version)
 	VALUES (99, null, null, null, 'annis', 'ADMIN', 1);
-	
+
 INSERT INTO public.animal(
 	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
 	VALUES (99, 'cest un chat', null, 'chat', null, null);	

@@ -32,22 +32,28 @@ public class Animal {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqAnimal")
 	@Column(name="id_animal", nullable = false)
 	private Integer id;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="nom_courant", nullable = false,unique = true, length = 150)
 	private String nomCourant;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="nom_scientifique",unique = false, length = 150)
 	private String nomScientifique;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="emplacement_image")
 	private String emplacementImage;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="description")
 	private String description;
+	
 	@JsonView(Views.Common.class)
 	@Column(name="ordre", length=20)
 	@Enumerated(EnumType.STRING)
 	private Ordre ordre;
+	
 	@JsonView(Views.AnimalwithObservation.class)
 	@OneToMany (mappedBy = "animal")
 	private List<Observation> observations=new ArrayList<Observation>();

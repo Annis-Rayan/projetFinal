@@ -35,8 +35,6 @@ public class InscriptionRestController {
 	@Autowired
 	private LoginRepository loginRepository;
 	@Autowired
-	private LoginRoleRepository LoginRoleRepository;
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired 
 	private UtilisateurService utilisateurservice;
@@ -47,7 +45,7 @@ public class InscriptionRestController {
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Login> optional=loginRepository.findById(login.getLogin());
+		Optional<Login> optional=loginRepository.findById(login.getId());
 		if(optional.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
@@ -66,7 +64,7 @@ public class InscriptionRestController {
 		u=utilisateurservice.findByPseudo(u.getPseudo()).get();
 		login.setUtilisateur(u);
 		
-		LoginRoleRepository.save(role);
+		loginRepository.save(login);
 		
 		
 		
@@ -74,8 +72,8 @@ public class InscriptionRestController {
 	}
 	
 	@GetMapping("/{login}")
-	public ResponseEntity<Boolean> loginDispo(@PathVariable("login")String login){
-		Optional<Login>opt=loginRepository.findById(login);
+	public ResponseEntity<Boolean> loginDispo(@PathVariable("login")Integer id){
+		Optional<Login>opt=loginRepository.findById(id);
 		if(opt.isPresent()) {
 			return new ResponseEntity<>(false,HttpStatus.OK);
 		}

@@ -4,9 +4,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -15,9 +18,16 @@ import projetFinalBoot.entity.views.Views;
 
 @Entity
 @Table(name = "login")
+@SequenceGenerator(name="seqlogin",sequenceName = "seq_login",initialValue=100,allocationSize=1)
 public class Login {
+	
 	@JsonView(Views.Common.class)
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqlogin")
+	@Column(name="id_login", nullable = false)
+	private Integer id;
+	
+	@JsonView(Views.Common.class)
 	@Column(name = "username", length = 100, nullable = false)
 	private String login;
 	
@@ -76,6 +86,17 @@ public class Login {
 	}
 
 	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public Set<LoginRole> getRoless() {
 		return roles;
 	}

@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
+import static org.junit.jupiter.api.Assertions.*;
 
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Localisation;
@@ -46,8 +50,6 @@ public class ConnexionBDDcreateTest {
 	private LoginRepository loginRepository;
 	@Autowired 
 	private UtilisateurService utilisateurservice;
-	@Autowired
-	private LoginRoleRepository LoginRoleRepository;
 	
 	@Test
 	public void find() throws IOException {
@@ -91,8 +93,7 @@ public class ConnexionBDDcreateTest {
 	
 	@Test
 	public void pitie() {
-		System.out.println("coucou");
-		System.out.println("****************************************************");
+		
 		Login login =new Login();
 		login.setLogin("toto");
 		login.setPassword("bwwwa");
@@ -108,11 +109,28 @@ public class ConnexionBDDcreateTest {
 		u.setPseudo(login.getLogin());
 		u.setType(TypeUtilisateur.USER);
 		utilisateurservice.save(u);
-		
+
 		u=utilisateurservice.findByPseudo(u.getPseudo()).get();
+		
 		login.setUtilisateur(u);
 		
-		LoginRoleRepository.save(role);
+		loginRepository.save(login);
 	}
+	
+	
+	@Test
+	public void unpeuencore() {
+		
+		Optional<Login> opt = loginRepository.findByName("annis");
+		
+		if (opt.isPresent()) 
+			assertEquals( passwordEncoder.matches("annis",opt.get().getPassword()),true);
+		
+		else
+			fail();
+		
+		//System.out.println(opt.get(0).getLogin());
+	}
+	
 	
 }
