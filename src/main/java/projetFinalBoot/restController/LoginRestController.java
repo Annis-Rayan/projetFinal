@@ -42,10 +42,10 @@ public class LoginRestController {
 		Optional<Login> opt = loginRepository.findByName(login.getLogin());
 		
 		if(opt.isPresent() )
-			if( passwordEncoder.matches("annis",opt.get().getPassword()))
+			if( passwordEncoder.matches(login.getPassword(),opt.get().getPassword()))
 				return new ResponseEntity<Login>(opt.get(),HttpStatus.OK);
 		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 	}
 	
 	
