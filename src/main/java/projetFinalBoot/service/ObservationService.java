@@ -14,7 +14,6 @@ import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.LocalisationRepository;
 import projetFinalBoot.repository.ObservationRepository;
-import projetFinalBoot.repository.UtilisateurRepository;
 
 @Service
 public class ObservationService {

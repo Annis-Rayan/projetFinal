@@ -15,7 +15,6 @@ import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.models.ImageModel;
-import projetFinalBoot.repository.AnimalRepository;
 import projetFinalBoot.repository.ImageRepository;
 import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.ObservationService;
@@ -48,7 +47,7 @@ public class ConnexionBDDcreateTest {
 		}
 		user.setImageProfil(img);
         
-        final ImageModel savedImage = imageRepository.save(img);
+        imageRepository.save(img);
         utilisateurService.save(user);
 	}
 	

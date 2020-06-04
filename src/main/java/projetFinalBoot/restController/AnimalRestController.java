@@ -25,7 +25,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projetFinalBoot.entity.Animal;
-import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.views.Views;
 import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.ObservationService;
