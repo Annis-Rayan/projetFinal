@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.models.ImageModel;
 import projetFinalBoot.repository.ImageRepository;
+import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.UtilisateurService;
 
 @RestController
@@ -31,6 +33,9 @@ public class ImageController {
     
     @Autowired
     UtilisateurService utilisateurService;
+    
+    @Autowired
+    AnimalService animalService;
 
     @PostMapping("users/edit/upload/{id}")
     public ResponseEntity<ImageModel> uplaodImageUser(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
@@ -46,7 +51,6 @@ public class ImageController {
 			imageRepository.deleteById(img2.getId());
 		}
         
-        
        
         final ImageModel savedImage = imageRepository.save(img);
         
@@ -58,41 +62,28 @@ public class ImageController {
     }
 
     
-    @PostMapping("animal/{id}/upload")
+    @PostMapping("animal/edit/upload/{id}")
     public ResponseEntity<ImageModel> uplaodImageAnimal(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
 
-    	Utilisateur user = utilisateurService.findById(id).get();
+    	Animal animal = animalService.findById(id).get();
     	
         ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
         
-        if (user.getImageProfil()!=null) {
-			imageRepository.deleteById(user.getImageProfil().getId());
+        if (animal.getImageProfil()!=null) {
+        	ImageModel img2=animal.getImageProfil();
+        	animal.setImageProfil(null);
+        	animalService.save(animal);
+			imageRepository.deleteById(img2.getId());
 		}
         
-        user.setImageProfil(img);
-        
+       
         final ImageModel savedImage = imageRepository.save(img);
-        utilisateurService.save(user);
+        
+        animal.setImageProfil(savedImage); 
+        
+        animalService.save(animal);
 
         return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
     }
     
-    @GetMapping("users/{id}/download")
-    public ResponseEntity<Void> downloadImage(@PathVariable("id") Integer id) throws IOException {
-			
-    	
-    	Optional<Utilisateur> user = utilisateurService.findById(id);
-    	if (!user.isPresent()) {
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
-		}
-    	return null;
-    	
-        //ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
-        //final ImageModel savedImage = imageRepository.save(img);
-
-        //return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
-
-
-    }
-	
 }

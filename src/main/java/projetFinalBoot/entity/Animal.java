@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projetFinalBoot.entity.views.Views;
+import projetFinalBoot.models.ImageModel;
 
 
 
@@ -54,6 +56,10 @@ public class Animal {
 	@Enumerated(EnumType.STRING)
 	private Ordre ordre;
 	
+	@JsonView(Views.Common.class)
+	@OneToOne
+	private ImageModel imageProfil;
+	
 	@JsonView(Views.AnimalwithObservation.class)
 	@OneToMany (mappedBy = "animal")
 	private List<Observation> observations=new ArrayList<Observation>();
@@ -76,6 +82,16 @@ public class Animal {
 		this.emplacementImage = emplacementImage;
 		this.description = description;
 		this.ordre = ordre;
+	}
+
+
+	public ImageModel getImageProfil() {
+		return imageProfil;
+	}
+
+
+	public void setImageProfil(ImageModel imageProfil) {
+		this.imageProfil = imageProfil;
 	}
 
 

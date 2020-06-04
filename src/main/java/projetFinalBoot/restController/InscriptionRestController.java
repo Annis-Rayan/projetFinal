@@ -1,5 +1,8 @@
 package projetFinalBoot.restController;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -22,6 +25,7 @@ import projetFinalBoot.entity.LoginRole;
 import projetFinalBoot.entity.Role;
 import projetFinalBoot.entity.TypeUtilisateur;
 import projetFinalBoot.entity.Utilisateur;
+import projetFinalBoot.models.ImageModel;
 import projetFinalBoot.repository.LoginRepository;
 import projetFinalBoot.repository.LoginRoleRepository;
 import projetFinalBoot.service.UtilisateurService;
@@ -42,7 +46,7 @@ public class InscriptionRestController {
 	
 	
 	@PostMapping({"","/"})
-	public ResponseEntity<Utilisateur> inscription(@Valid @RequestBody Login login,BindingResult br){
+	public ResponseEntity<Utilisateur> inscription(@Valid @RequestBody Login login,BindingResult br) throws IOException{
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -57,9 +61,14 @@ public class InscriptionRestController {
 		role.setLogin(login);
 		role.setRole(Role.ROLE_USER);
 		
+		
 		Utilisateur u =new Utilisateur();
 		u.setPseudo(login.getLogin());
 		u.setType(TypeUtilisateur.USER);
+		
+		//File file = new File("profiledefault.png");
+		//ImageModel img = new ImageModel(file.getName(),"image/jpeg",Files.readAllBytes(file.toPath()));
+		//u.setImageProfil(img);
 		utilisateurservice.save(u);
 		
 		u=utilisateurservice.findByPseudo(u.getPseudo()).get();

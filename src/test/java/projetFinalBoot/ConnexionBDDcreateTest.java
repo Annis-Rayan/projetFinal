@@ -1,19 +1,21 @@
 package projetFinalBoot;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
-import static org.junit.jupiter.api.Assertions.*;
 
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Localisation;
@@ -26,7 +28,6 @@ import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.models.ImageModel;
 import projetFinalBoot.repository.ImageRepository;
 import projetFinalBoot.repository.LoginRepository;
-import projetFinalBoot.repository.LoginRoleRepository;
 import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.ObservationService;
 import projetFinalBoot.service.UtilisateurService;
@@ -54,7 +55,8 @@ public class ConnexionBDDcreateTest {
 	@Test
 	public void find() throws IOException {
 		
-		File file = new File("C:\\Users\\utilisateur\\Desktop\\Images projet sopra1\\bird1.jpg");
+		File file = new File("C:\\boulot\\projetFinal\\src\\main\\java\\projetFinalBoot\\restController\\profiledefault.png");
+		
 		
 		
 		Utilisateur user = utilisateurService.findById(1).get();
@@ -75,7 +77,30 @@ public class ConnexionBDDcreateTest {
         assertNotNull(user.getImageProfil());
 	}
 	
-	
+	@Test
+	public void animalimage() throws IOException {
+		
+		File file = new File("C:\\boulot\\projetFinal\\src\\main\\java\\projetFinalBoot\\restController\\profiledefault.png");
+		
+		
+		
+		Animal user = animalService.findById(99).get();
+		ImageModel img = new ImageModel(file.getName(),"image/jpeg",Files.readAllBytes(file.toPath()));
+		if (user.getImageProfil()!=null) {
+        	ImageModel img2=user.getImageProfil();
+        	user.setImageProfil(null);
+        	animalService.save(user);
+			imageRepository.deleteById(img2.getId());
+		}
+		user.setImageProfil(img);
+        
+        imageRepository.save(img);
+        
+        animalService.save(user);
+        
+        user = animalService.findById(99).get();
+        assertNotNull(user.getImageProfil());
+	}
 	
 	@Test
 	public void help() {
@@ -212,6 +237,6 @@ public class ConnexionBDDcreateTest {
 		}
 			
 		
-		//System.out.println(opt.get(0).getLogin());
+		
 	}
 }
