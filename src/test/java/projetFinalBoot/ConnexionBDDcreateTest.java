@@ -65,8 +65,13 @@ public class ConnexionBDDcreateTest {
 		user.setImageProfil(img);
         
         imageRepository.save(img);
+        
         utilisateurService.save(user);
+        
+        user = utilisateurService.findById(1).get();
+        assertNotNull(user.getImageProfil());
 	}
+	
 	
 	
 	@Test
