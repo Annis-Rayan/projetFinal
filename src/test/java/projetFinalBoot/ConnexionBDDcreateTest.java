@@ -8,15 +8,21 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
 
 import projetFinalBoot.entity.Animal;
 import projetFinalBoot.entity.Localisation;
+import projetFinalBoot.entity.Login;
+import projetFinalBoot.entity.LoginRole;
 import projetFinalBoot.entity.Observation;
+import projetFinalBoot.entity.Role;
+import projetFinalBoot.entity.TypeUtilisateur;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.models.ImageModel;
-import projetFinalBoot.repository.AnimalRepository;
 import projetFinalBoot.repository.ImageRepository;
+import projetFinalBoot.repository.LoginRepository;
+import projetFinalBoot.repository.LoginRoleRepository;
 import projetFinalBoot.service.AnimalService;
 import projetFinalBoot.service.ObservationService;
 import projetFinalBoot.service.UtilisateurService;
@@ -34,6 +40,14 @@ public class ConnexionBDDcreateTest {
 	private ObservationService observationService;
 	@Autowired
 	private AnimalService animalService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private LoginRepository loginRepository;
+	@Autowired 
+	private UtilisateurService utilisateurservice;
+	@Autowired
+	private LoginRoleRepository LoginRoleRepository;
 	
 	@Test
 	public void find() throws IOException {
@@ -48,7 +62,7 @@ public class ConnexionBDDcreateTest {
 		}
 		user.setImageProfil(img);
         
-        final ImageModel savedImage = imageRepository.save(img);
+        imageRepository.save(img);
         utilisateurService.save(user);
 	}
 	
@@ -73,6 +87,32 @@ public class ConnexionBDDcreateTest {
 		o.setUtilisateur(u);
 		
 		observationService.save(o);
+	}
+	
+	@Test
+	public void pitie() {
+		System.out.println("coucou");
+		System.out.println("****************************************************");
+		Login login =new Login();
+		login.setLogin("toto");
+		login.setPassword("bwwwa");
+		
+		login.setEnable(true);
+		login.setPassword(passwordEncoder.encode(login.getPassword()));
+		loginRepository.save(login);
+		LoginRole role=new LoginRole();
+		role.setLogin(login);
+		role.setRole(Role.ROLE_USER);
+		
+		Utilisateur u =new Utilisateur();
+		u.setPseudo(login.getLogin());
+		u.setType(TypeUtilisateur.USER);
+		utilisateurservice.save(u);
+		
+		u=utilisateurservice.findByPseudo(u.getPseudo()).get();
+		login.setUtilisateur(u);
+		
+		LoginRoleRepository.save(role);
 	}
 	
 }

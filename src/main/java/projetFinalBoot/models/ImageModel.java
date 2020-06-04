@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import projetFinalBoot.entity.Utilisateur;
+
+import projetFinalBoot.entity.views.Views;
+
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="image_model")
@@ -15,17 +19,22 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class ImageModel {
+	
+	@JsonView(Views.Common.class)
     @Id
     @Column(name = "id")
     @GeneratedValue
     private Long id;
-
+    
+	@JsonView(Views.Common.class)
     @Column(name = "name")
     private String name;
 
+	@JsonView(Views.Common.class)
     @Column(name = "type")
     private String type;
 
+	@JsonView(Views.Common.class)
     @Lob
     @Column(name = "pic")
     private byte[] pic;

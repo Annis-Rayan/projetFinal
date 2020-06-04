@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import projetFinalBoot.entity.Login;
 import projetFinalBoot.entity.LoginRole;
 import projetFinalBoot.entity.Role;
+import projetFinalBoot.entity.TypeUtilisateur;
+import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.LoginRepository;
 import projetFinalBoot.repository.LoginRoleRepository;
+import projetFinalBoot.service.UtilisateurService;
 
 
 @RestController
@@ -35,11 +38,14 @@ public class InscriptionRestController {
 	private LoginRoleRepository LoginRoleRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired 
+	private UtilisateurService utilisateurservice;
+	
 	
 	@PostMapping({"","/"})
-	public ResponseEntity<Void> inscription(@Valid @RequestBody Login login,BindingResult br){
+	public ResponseEntity<Utilisateur> inscription(@Valid @RequestBody Login login,BindingResult br){
 		if(br.hasErrors()) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		Optional<Login> optional=loginRepository.findById(login.getLogin());
 		if(optional.isPresent()) {
@@ -51,8 +57,20 @@ public class InscriptionRestController {
 		LoginRole role=new LoginRole();
 		role.setLogin(login);
 		role.setRole(Role.ROLE_USER);
+		
+		Utilisateur u =new Utilisateur();
+		u.setPseudo(login.getLogin());
+		u.setType(TypeUtilisateur.USER);
+		utilisateurservice.save(u);
+		
+		u=utilisateurservice.findByPseudo(u.getPseudo()).get();
+		login.setUtilisateur(u);
+		
 		LoginRoleRepository.save(role);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		
+		
+		
+		return new ResponseEntity<Utilisateur>(u,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{login}")

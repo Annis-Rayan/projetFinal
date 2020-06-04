@@ -1,7 +1,6 @@
 package projetFinalBoot.restController;
 
 import java.net.URI;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Observation;
-import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.entity.views.Views;
 import projetFinalBoot.service.ObservationService;
 

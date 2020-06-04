@@ -10,7 +10,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import projetFinalBoot.entity.Observation;
-import projetFinalBoot.entity.Signalement;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.repository.ObservationRepository;
 import projetFinalBoot.repository.UtilisateurRepository;

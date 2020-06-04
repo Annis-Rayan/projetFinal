@@ -3,19 +3,13 @@ package projetFinalBoot.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import projetFinalBoot.entity.Animal;
-import projetFinalBoot.entity.Localisation;
-import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Localisation;
 import projetFinalBoot.entity.Observation;
-import projetFinalBoot.repository.LocalisationRepository;
 import projetFinalBoot.repository.LocalisationRepository;
 import projetFinalBoot.repository.ObservationRepository;
 
