@@ -39,7 +39,7 @@ public class LoginRestController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		Optional<Login> opt = loginRepository.findByName("annis");
+		Optional<Login> opt = loginRepository.findByName(login.getLogin());
 		
 		if(opt.isPresent() )
 			if( passwordEncoder.matches("annis",opt.get().getPassword()))

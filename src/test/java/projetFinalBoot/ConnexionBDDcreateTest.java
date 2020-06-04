@@ -155,5 +155,55 @@ public class ConnexionBDDcreateTest {
 		//System.out.println(opt.get(0).getLogin());
 	}
 	
+	@Test
+	public void erreur() {
+		
+		Login login =new Login();
+		login.setLogin("toto");
+		login.setPassword("bwwwaa");
+		
+		login.setEnable(true);
+		login.setPassword(passwordEncoder.encode(login.getPassword()));
+		loginRepository.save(login);
+		LoginRole role=new LoginRole();
+		role.setLogin(login);
+		role.setRole(Role.ROLE_USER);
+		
+		Utilisateur u =new Utilisateur();
+		u.setPseudo(login.getLogin());
+		u.setType(TypeUtilisateur.USER);
+		utilisateurservice.save(u);
+
+		u=utilisateurservice.findByPseudo(u.getPseudo()).get();
+		
+		login.setUtilisateur(u);
+		
+		loginRepository.save(login);
+		
+		Optional<Login> opt = loginRepository.findByName("toto");
+		
+		if (opt.isPresent()) 
+			assertEquals( passwordEncoder.matches("bwwwa",opt.get().getPassword()),false);
+		
+		else
+			fail();
+		
+		//System.out.println(opt.get(0).getLogin());
+	}
 	
+	@Test
+	public void erreur2() {
+		
+		Optional<Login> opt = loginRepository.findByName("tota");
+		
+		if (opt.isPresent()) 
+			fail();
+		
+		else {
+			assertTrue(true);
+		}
+			
+		
+		//System.out.println(opt.get(0).getLogin());
+	}
 }

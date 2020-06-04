@@ -1,6 +1,7 @@
 package projetFinalBoot.restController;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,9 +83,14 @@ public class ImageController {
     }
     
     @GetMapping("users/{id}/download")
-    public ResponseEntity<ImageModel> downloadImage(@PathVariable("id") Integer id) throws IOException {
-		return null;
-
+    public ResponseEntity<Void> downloadImage(@PathVariable("id") Integer id) throws IOException {
+			
+    	
+    	Optional<Utilisateur> user = utilisateurService.findById(id);
+    	if (!user.isPresent()) {
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
+    	return null;
     	
         //ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
         //final ImageModel savedImage = imageRepository.save(img);
