@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import projetFinalBoot.entity.Login;
+import projetFinalBoot.entity.Role;
 import projetFinalBoot.repository.LoginRepository;
 
 @RestController
@@ -31,7 +32,7 @@ public class LoginRestController {
 	private LoginRepository loginRepository;
 	
 	@GetMapping({ "", "/" })
-	public ResponseEntity<Void> login(@Valid @RequestBody Login login,BindingResult br) {
+	public ResponseEntity<Role> login(@Valid @RequestBody Login login,BindingResult br) {
 		
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -45,7 +46,7 @@ public class LoginRestController {
 		
 		if(opt.isPresent())
 		
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<Role>(opt.get().getRoles().getRole(),HttpStatus.OK);
 		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
