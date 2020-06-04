@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import projetFinalBoot.service.UtilisateurService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/rest")
+@RequestMapping(path = "/rest/")
 public class ImageController {
 	
 
@@ -59,7 +60,7 @@ public class ImageController {
         System.out.println("------------------------------------------------");
         return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
     }
-    //{"","observation/{id}/upload",
+
     
     @PostMapping("animal/{id}/upload")
     public ResponseEntity<ImageModel> uplaodImageAnimal(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
@@ -80,13 +81,15 @@ public class ImageController {
         return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
     }
     
-    @PostMapping({"animal/{id}/download","observation/{id}/download","users/{id}/download"})
-    public ResponseEntity<ImageModel> downloadImage(@RequestParam("myFile") MultipartFile file) throws IOException {
+    @GetMapping("users/{id}/download")
+    public ResponseEntity<ImageModel> downloadImage(@PathVariable("id") Integer id) throws IOException {
+		return null;
 
-        ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
-        final ImageModel savedImage = imageRepository.save(img);
+    	
+        //ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
+        //final ImageModel savedImage = imageRepository.save(img);
 
-        return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
+        //return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
 
 
     }

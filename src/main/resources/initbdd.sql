@@ -1,3 +1,12 @@
+INSERT INTO public.login(
+	 username, enable, password)
+	VALUES ( 'annis', true, 'annis');
+
+INSERT INTO public.login(
+	 username, enable, password)
+	VALUES ('mec', true, 'mec');
+	
+
 INSERT INTO public.localisation(
 	id_localisation, localite, pays, region)
 	VALUES (1, 'nd', 'nd', 'nd');

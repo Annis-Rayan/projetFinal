@@ -118,13 +118,36 @@ public class ConnexionBDDcreateTest {
 	}
 	
 	
+	
 	@Test
 	public void unpeuencore() {
 		
-		Optional<Login> opt = loginRepository.findByName("annis");
+		Login login =new Login();
+		login.setLogin("toto");
+		login.setPassword("bwwwa");
+		
+		login.setEnable(true);
+		login.setPassword(passwordEncoder.encode(login.getPassword()));
+		loginRepository.save(login);
+		LoginRole role=new LoginRole();
+		role.setLogin(login);
+		role.setRole(Role.ROLE_USER);
+		
+		Utilisateur u =new Utilisateur();
+		u.setPseudo(login.getLogin());
+		u.setType(TypeUtilisateur.USER);
+		utilisateurservice.save(u);
+
+		u=utilisateurservice.findByPseudo(u.getPseudo()).get();
+		
+		login.setUtilisateur(u);
+		
+		loginRepository.save(login);
+		
+		Optional<Login> opt = loginRepository.findByName("toto");
 		
 		if (opt.isPresent()) 
-			assertEquals( passwordEncoder.matches("annis",opt.get().getPassword()),true);
+			assertEquals( passwordEncoder.matches("bwwwa",opt.get().getPassword()),true);
 		
 		else
 			fail();

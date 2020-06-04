@@ -22,11 +22,8 @@ public class AuthService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		//TODO verifier
-		Login l = new Login();
-		l.setLogin(username);
-		Example<Login> example = Example.of(l);
-		Optional<Login> opt = loginRepository.findOne(example);
+
+		Optional<Login> opt = loginRepository.findByName(username);
 		if (!opt.isPresent()) {
 			throw new UsernameNotFoundException("utlisateur inconnu");
 		}

@@ -40,12 +40,13 @@ public class InscriptionRestController {
 	private UtilisateurService utilisateurservice;
 	
 	
+	
 	@PostMapping({"","/"})
 	public ResponseEntity<Utilisateur> inscription(@Valid @RequestBody Login login,BindingResult br){
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Login> optional=loginRepository.findById(login.getId());
+		Optional<Login> optional=loginRepository.findByName(login.getLogin());
 		if(optional.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
@@ -66,14 +67,12 @@ public class InscriptionRestController {
 		
 		loginRepository.save(login);
 		
-		
-		
 		return new ResponseEntity<Utilisateur>(u,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{login}")
-	public ResponseEntity<Boolean> loginDispo(@PathVariable("login")Integer id){
-		Optional<Login>opt=loginRepository.findById(id);
+	public ResponseEntity<Boolean> loginDispo(@PathVariable("login")String id){
+		Optional<Login>opt=loginRepository.findByName(id);
 		if(opt.isPresent()) {
 			return new ResponseEntity<>(false,HttpStatus.OK);
 		}

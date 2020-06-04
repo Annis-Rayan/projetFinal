@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import projetFinalBoot.entity.Login;
 
 
-public interface LoginRepository extends JpaRepository<Login, Integer> {
+public interface LoginRepository extends JpaRepository<Login, String> {
 	@Query("select l from Login l left join fetch l.roles where l.login=:login")
 	public Optional<Login> findByIdWithRoles(String login);
 	

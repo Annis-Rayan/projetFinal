@@ -18,15 +18,11 @@ import projetFinalBoot.entity.views.Views;
 
 @Entity
 @Table(name = "login")
-@SequenceGenerator(name="seqlogin",sequenceName = "seq_login",initialValue=100,allocationSize=1)
+
 public class Login {
 	
-	@JsonView(Views.Common.class)
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqlogin")
-	@Column(name="id_login", nullable = false)
-	private Integer id;
-	
 	@JsonView(Views.Common.class)
 	@Column(name = "username", length = 100, nullable = false)
 	private String login;
@@ -84,18 +80,6 @@ public class Login {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-
-	
-	
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 
 	public Set<LoginRole> getRoless() {
 		return roles;
