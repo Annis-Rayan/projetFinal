@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import projetFinalBoot.entity.Animal;
+import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
 import projetFinalBoot.models.ImageModel;
 import projetFinalBoot.repository.ImageRepository;
 import projetFinalBoot.service.AnimalService;
+import projetFinalBoot.service.ObservationService;
 import projetFinalBoot.service.UtilisateurService;
 
 @RestController
@@ -36,6 +38,9 @@ public class ImageController {
     
     @Autowired
     AnimalService animalService;
+    
+    @Autowired
+    ObservationService observationService;
 
     @PostMapping("users/edit/upload/{id}")
     public ResponseEntity<ImageModel> uplaodImageUser(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
@@ -82,6 +87,30 @@ public class ImageController {
         animal.setEmplacementImage(savedImage); 
         
         animalService.save(animal);
+
+        return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
+    }
+    
+    @PostMapping("observation/edit/upload/{id}")
+    public ResponseEntity<ImageModel> uplaodImageobservation(@RequestParam("myFile") MultipartFile file,@PathVariable("id") Integer id) throws IOException {
+
+
+    	Observation observation = observationService.findById(id).get();
+        ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
+        
+        if (observation.getEmplacementImage()!=null) {
+        	ImageModel img2=observation.getEmplacementImage();
+        	observation.setEmplacementImage(null);
+        	observationService.save(observation);
+			imageRepository.deleteById(img2.getId());
+		}
+        
+       
+        final ImageModel savedImage = imageRepository.save(img);
+        
+        observation.setEmplacementImage(savedImage); 
+        
+        observationService.save(observation);
 
         return new ResponseEntity<ImageModel>(savedImage, HttpStatus.OK);
     }

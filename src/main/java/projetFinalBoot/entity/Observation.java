@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projetFinalBoot.entity.views.Views;
+import projetFinalBoot.models.ImageModel;
 
 
 
@@ -64,6 +65,10 @@ public class Observation {
 	@JoinColumn(name = "animal", foreignKey = @ForeignKey(name = "animal_fk"))
 	private Animal animal;
 	
+	@JsonView(Views.Common.class)
+	@OneToOne
+	private ImageModel emplacementImage;
+	
 	@JsonView(Views.ObservationWithSignalementObservation.class)
 	@OneToMany(mappedBy="observation")
 	private Set<SignalementObservation> signalementObservation = new HashSet<>();
@@ -72,6 +77,16 @@ public class Observation {
 	
 	// constructeur
 	
+	public ImageModel getEmplacementImage() {
+		return emplacementImage;
+	}
+
+
+	public void setEmplacementImage(ImageModel emplacementImage) {
+		this.emplacementImage = emplacementImage;
+	}
+
+
 	public Observation() {
 	}
 
