@@ -33,9 +33,7 @@ public class AnimalService {
 		if (animal.getDescription()==null || animal.getDescription().isEmpty()) {
 			animal.setDescription("non defini");
 		}
-		if (animal.getEmplacementImage()==null || animal.getEmplacementImage().isEmpty()) {
-			animal.setEmplacementImage("non defini");
-		}
+		
 		
 		animalRepository.save(animal);
 	}

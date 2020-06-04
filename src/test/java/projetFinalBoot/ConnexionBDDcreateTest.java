@@ -86,20 +86,20 @@ public class ConnexionBDDcreateTest {
 		
 		Animal user = animalService.findById(99).get();
 		ImageModel img = new ImageModel(file.getName(),"image/jpeg",Files.readAllBytes(file.toPath()));
-		if (user.getImageProfil()!=null) {
-        	ImageModel img2=user.getImageProfil();
-        	user.setImageProfil(null);
+		if (user.getEmplacementImage()!=null) {
+        	ImageModel img2=user.getEmplacementImage();
+        	user.setEmplacementImage(null);
         	animalService.save(user);
 			imageRepository.deleteById(img2.getId());
 		}
-		user.setImageProfil(img);
+		user.setEmplacementImage(img);
         
         imageRepository.save(img);
         
         animalService.save(user);
         
         user = animalService.findById(99).get();
-        assertNotNull(user.getImageProfil());
+        assertNotNull(user.getEmplacementImage());
 	}
 	
 	@Test

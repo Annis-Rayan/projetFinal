@@ -43,9 +43,7 @@ public class Animal {
 	@Column(name="nom_scientifique",unique = false, length = 150)
 	private String nomScientifique;
 	
-	@JsonView(Views.Common.class)
-	@Column(name="emplacement_image")
-	private String emplacementImage;
+	
 	
 	@JsonView(Views.Common.class)
 	@Column(name="description")
@@ -58,7 +56,7 @@ public class Animal {
 	
 	@JsonView(Views.Common.class)
 	@OneToOne
-	private ImageModel imageProfil;
+	private ImageModel emplacementImage;
 	
 	@JsonView(Views.AnimalwithObservation.class)
 	@OneToMany (mappedBy = "animal")
@@ -67,7 +65,7 @@ public class Animal {
 	public Animal(String nomCourant, String nomScientifique, String emplacementImage, String description) {
 		this.nomCourant = nomCourant;
 		this.nomScientifique = nomScientifique;
-		this.emplacementImage = emplacementImage;
+		
 		this.description = description;
 	}
 
@@ -79,20 +77,13 @@ public class Animal {
 	public Animal(String nomScientifique, String emplacementImage, String description, Ordre ordre) {
 		super();
 		this.nomScientifique = nomScientifique;
-		this.emplacementImage = emplacementImage;
+		
 		this.description = description;
 		this.ordre = ordre;
 	}
 
 
-	public ImageModel getImageProfil() {
-		return imageProfil;
-	}
-
-
-	public void setImageProfil(ImageModel imageProfil) {
-		this.imageProfil = imageProfil;
-	}
+	
 
 
 	public Animal(String nomCourant, String description) {
@@ -116,13 +107,7 @@ public class Animal {
 		this.nomScientifique = nomScientifique;
 	}
 
-	public String getEmplacementImage() {
-		return emplacementImage;
-	}
-
-	public void setEmplacementImage(String emplacementImage) {
-		this.emplacementImage = emplacementImage;
-	}
+	
 
 	public String getDescription() {
 		return description;
@@ -132,6 +117,16 @@ public class Animal {
 		this.description = description;
 	}
 
+
+
+	public ImageModel getEmplacementImage() {
+		return emplacementImage;
+	}
+
+
+	public void setEmplacementImage(ImageModel emplacementImage) {
+		this.emplacementImage = emplacementImage;
+	}
 
 
 	public Integer getId() {

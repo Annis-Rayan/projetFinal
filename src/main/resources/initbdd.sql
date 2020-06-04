@@ -24,14 +24,14 @@ INSERT INTO public.utilisateur(
 	VALUES (99, null, null, null, 'annis', 'ADMIN', 1);
 
 INSERT INTO public.animal(
-	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
+	id_animal, description, emplacement_image_id, nom_courant, nom_scientifique, ordre)
 	VALUES (99, 'cest un chat', null, 'chat', null, null);	
 	
 INSERT INTO public.animal(
-	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
+	id_animal, description, emplacement_image_id, nom_courant, nom_scientifique, ordre)
 	VALUES (98, 'cest un chien', null, 'chien', 'nom courant_chien',null);	
 INSERT INTO public.animal(
-	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
+	id_animal, description, emplacement_image_id, nom_courant, nom_scientifique, ordre)
 	VALUES (97, 'cest un souris', null, 'souris', null, null);	
 
 	

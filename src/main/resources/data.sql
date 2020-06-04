@@ -27,15 +27,15 @@ INSERT INTO public.login(
 	VALUES ('mec', true, 'mec');
 	
 INSERT INTO public.animal(
-	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
+	id_animal, description, emplacement_image_id, nom_courant, nom_scientifique, ordre)
 	VALUES (nextval('seq_animal'), 'cest un chat', null, 'chat', 'chat nom courant',null);	
 	
 INSERT INTO public.animal(
-	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
+	id_animal, description, emplacement_image_id, nom_courant, nom_scientifique, ordre)
 	VALUES (nextval('seq_animal'), 'cest un chien', null, 'chien', null, null);	
 
 INSERT INTO public.animal(
-	id_animal, description, emplacement_image, nom_courant, nom_scientifique, ordre)
+	id_animal, description, emplacement_image_id, nom_courant, nom_scientifique, ordre)
 	VALUES (nextval('seq_animal'), 'cest un souris', null, 'souris', null, null);	
 
 	

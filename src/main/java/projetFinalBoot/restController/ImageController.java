@@ -69,9 +69,9 @@ public class ImageController {
     	
         ImageModel img = new ImageModel( file.getOriginalFilename(),file.getContentType(),file.getBytes() );
         
-        if (animal.getImageProfil()!=null) {
-        	ImageModel img2=animal.getImageProfil();
-        	animal.setImageProfil(null);
+        if (animal.getEmplacementImage()!=null) {
+        	ImageModel img2=animal.getEmplacementImage();
+        	animal.setEmplacementImage(null);
         	animalService.save(animal);
 			imageRepository.deleteById(img2.getId());
 		}
@@ -79,7 +79,7 @@ public class ImageController {
        
         final ImageModel savedImage = imageRepository.save(img);
         
-        animal.setImageProfil(savedImage); 
+        animal.setEmplacementImage(savedImage); 
         
         animalService.save(animal);
 
