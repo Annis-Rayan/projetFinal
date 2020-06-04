@@ -145,9 +145,7 @@ public class UtilisateurRestController {
 			utilisateurEnBase.setNom(utilisateur.getNom());
 			utilisateurEnBase.setPrenom(utilisateur.getPrenom());
 			utilisateurEnBase.setImageProfil(utilisateur.getImageProfil());
-			if (utilisateur.getObservations() != null) {
-				utilisateurEnBase.setObservations(utilisateur.getObservations());
-			}
+
 			utilisateurService.save(utilisateurEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

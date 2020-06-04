@@ -33,28 +33,18 @@ public class UtilisateurService {
 	}
 	
 	public Optional<Utilisateur> findByPseudo(String pseudo) {
-		Optional<Utilisateur> opt = utilisateurRepository.findByPseudo(pseudo);
+		
+		Utilisateur u = new Utilisateur();
+		u.setPseudo(pseudo);
+		Example<Utilisateur> example = Example.of(u);
+		
+		Optional<Utilisateur> opt = utilisateurRepository.findOne(example);
 		if(opt.isPresent()) {
 			return opt;
 		}
 		throw new IllegalArgumentException();
 	}
 	
-	public Utilisateur findByPseudoWithObservations(String pseudo) {
-		Optional<Utilisateur> opt = utilisateurRepository.findByPseudoWithObservations(pseudo);
-		if(opt.isPresent()) {
-			return opt.get();
-		}
-		throw new IllegalArgumentException();
-	}
-	
-	public Utilisateur findByIdWithObservations(Integer id) {
-		Optional<Utilisateur> opt = utilisateurRepository.findByIdWithObservations(id);
-		if(opt.isPresent()) {
-			return opt.get();
-		}
-		throw new IllegalArgumentException();
-	}
 
 	public List<Utilisateur> findAll() {
 		

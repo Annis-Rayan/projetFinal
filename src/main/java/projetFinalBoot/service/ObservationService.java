@@ -25,7 +25,7 @@ public class ObservationService {
 	private LocalisationRepository localisationRepository;
 	
 	@Autowired
-	private UtilisateurRepository utilisateurRepository;
+	private UtilisateurService utilisateurservice;
 	
 	@Autowired
 	AnimalService as;
@@ -104,7 +104,10 @@ public class ObservationService {
 	}
 	
 	public List<Observation> findByUser(String nom) {
-		Utilisateur user = utilisateurRepository.findByPseudo(nom).get();
+		
+		
+		
+		Utilisateur user = utilisateurservice.findByPseudo(nom).get();
 		
 		Observation obs=new Observation();
 		obs.setUtilisateur(user);;
