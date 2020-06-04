@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.zaxxer.hikari.util.SuspendResumeLock;
 
+import projetFinalBoot.entity.Login;
 import projetFinalBoot.entity.Observation;
 import projetFinalBoot.entity.Utilisateur;
+import projetFinalBoot.repository.LoginRepository;
 import projetFinalBoot.repository.ObservationRepository;
 import projetFinalBoot.repository.UtilisateurRepository;
 
@@ -24,6 +26,8 @@ public class UtilisateurService {
 	@Autowired
 	private ObservationRepository observationRepository;
 	
+	@Autowired
+	private LoginRepository loginrepository;
 	
 	public Optional<Utilisateur> findById(Integer id) {
 		Optional<Utilisateur> opt = utilisateurRepository.findById(id);
@@ -87,6 +91,10 @@ public class UtilisateurService {
 			observationRepository.save(observation);
 		}
 	    
+	    
+	   
+	    Optional<Login> l= loginrepository.findByName(opt.get().getPseudo());
+	    loginrepository.delete(l.get());
 	    //TODO signalement 
 	    
 	    utilisateurRepository.delete(opt.get());
